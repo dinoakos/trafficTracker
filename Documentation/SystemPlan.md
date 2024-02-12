@@ -23,7 +23,7 @@ The second view is directional view which will show the direction of traffic
 
 ### Map
 The map will use as the main place for visualization as the data will be applied to it using overlays. The user will be able to freely interact with the map.
-<img src = "traffic.png">
+<img src = "traffic.PNG">
 
 
 ### A real life example
