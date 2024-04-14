@@ -97,6 +97,8 @@
 
 <?php
 
+$test = getenv('test');
+echo ($test);
 $DBPW = getenv('DBPW');
 
 try {
@@ -114,9 +116,7 @@ $serverName = "tcp:trafficdb.database.windows.net,1433";
 $conn = sqlsrv_connect($serverName, $connectionInfo);
 
 if (!$conn){
-    $tsql= "SELECT * FROM [dbo].[testtable]";
-    $getResults= sqlsrv_query($conn, $tsql);
-    echo ($getResults);
+    echo ("connected at least");
 }
 
     
