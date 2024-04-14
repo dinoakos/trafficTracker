@@ -72,7 +72,7 @@
 
                 <hr style="width: 135%;">
 
-                <button style="width: 135%;" type='submit' name='submit' >Search</button>
+                <button style="width: 135%;" name='submit' >Search</button>
 
             </div>
 
@@ -125,9 +125,8 @@ while ($row = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_ASSOC)) {
     echo ($row['test'] . PHP_EOL);
 }
 sqlsrv_free_stmt($getResults);
-if(isset($_POST['submit'])){
-    $echo('testbutton');
-}
 
+
+if (isset($submit)) echo "testbutton";
 
 ?>
