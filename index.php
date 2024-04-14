@@ -99,6 +99,6 @@
 
 <?php
    
-   $echo(getenv("test"));
+   $var = getenv('test');
    
 ?>
