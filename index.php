@@ -99,6 +99,6 @@
 
 <?php
    
-     echo ("test");
+   $echo(getenv("DB_HOST"))
    
 ?>
