@@ -28,34 +28,36 @@
             <div class="col-md-4 style='border: 1px solid red">
                 <table cellpadding="1" id="ui">
                     <tbody>
-                        <tr id="iPLab">
-                            <td>From date</td>
-                            <td>To date</td>
-                            <td>From time</td>
-                            <td>To time</td>
-                            <td>Day</td>
-                        </tr>
-                        <tr>
-                            <td><input type="date" id="startDate" name="date-start" /></td>
-                            <!-- value="2023-01-01" min="2023-01-01" max="2023-12-31" -->
-                            <td><input type="date" id="endDate" name="date-end" /></td>
-                            <!-- value="2023-01-01" min="2023-01-01" max="2023-12-31" -->
-                            <td><input type="time" id="time1" name="timeFrom" /></td>
-                            <td><input type="time" id="time1" name="timeFrom" /></td>
-                            <td>
-                                <select id="weekDay" name="DayOfWeek">
-                                    <option value="None">---</option>
-                                    <option value="Monday">Monday</option>
-                                    <option value="Tuesday">Tuesday</option>
-                                    <option value="Wednesday">Wednesday</option>
-                                    <option value="Thursday">Thursday</option>
-                                    <option value="Friday">Friday</option>
-                                    <option value="Saturday">Saturday</option>
-                                    <option value="Sunday">Sunday</option>
+                        <form action='' method='POST'>
+                            <tr id="iPLab">
+                                <td>From date</td>
+                                <td>To date</td>
+                                <td>From time</td>
+                                <td>To time</td>
+                                <td>Day</td>
+                            </tr>
+                            <tr>
+                                <td><input type="date" id="startDate" name="date-start" /></td>
+                                <!-- value="2023-01-01" min="2023-01-01" max="2023-12-31" -->
+                                <td><input type="date" id="endDate" name="date-end" /></td>
+                                <!-- value="2023-01-01" min="2023-01-01" max="2023-12-31" -->
+                                <td><input type="time" id="time1" name="timeFrom" /></td>
+                                <td><input type="time" id="time1" name="timeFrom" /></td>
+                                <td>
+                                    <select id="weekDay" name="DayOfWeek">
+                                        <option value="None">---</option>
+                                        <option value="Monday">Monday</option>
+                                        <option value="Tuesday">Tuesday</option>
+                                        <option value="Wednesday">Wednesday</option>
+                                        <option value="Thursday">Thursday</option>
+                                        <option value="Friday">Friday</option>
+                                        <option value="Saturday">Saturday</option>
+                                        <option value="Sunday">Sunday</option>
 
-                                </select>
-                            </td>
-                        </tr>
+                                    </select>
+                                </td>
+                            </tr>
+                        </form>
                     </tbody>
                 </table>
 
@@ -70,7 +72,7 @@
 
                 <hr style="width: 135%;">
 
-                <button style="width: 135%;">Search</button>
+                <button style="width: 135%;" type='submit' name='submit' >Search</button>
 
             </div>
 
@@ -116,14 +118,15 @@ $conn = sqlsrv_connect($serverName, $connectionInfo);
 $tsql = "SELECT * FROM [dbo].[testtable]";
 $getResults = sqlsrv_query($conn, $tsql);
 
-if ($getResults == FALSE){
+if ($getResults == FALSE) {
     echo (sqlsrv_errors());
 }
-while ($row = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_ASSOC)) {
-    echo ($row['test'] . PHP_EOL);
+if(isset($_POST['submit'])){
+    while ($row = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_ASSOC)) {
+        echo ($row['test'] . PHP_EOL);
+    }
+    sqlsrv_free_stmt($getResults);
 }
-sqlsrv_free_stmt($getResults);
-
 
 
 ?>
