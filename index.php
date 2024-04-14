@@ -116,7 +116,7 @@ $connectionInfo = array("UID" => "dinoakos", "pwd" => $DBPW , "Database" => "Tra
 $serverName = "tcp:trafficdb.database.windows.net,1433";
 $conn = sqlsrv_connect($serverName, $connectionInfo);
 
-if (!$conn){
+if ($conn){
     echo ("connected at least");
 }
 
