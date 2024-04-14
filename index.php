@@ -103,22 +103,27 @@ $DBPW = getenv('DBPW');
 try {
     $conn = new PDO("sqlsrv:server = tcp:trafficdb.database.windows.net,1433; Database = TrafficDb", "dinoakos", "{$DBPW}");
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-}
-catch (PDOException $e) {
-    print("Error connecting to SQL Server.");
+} catch (PDOException $e) {
+    print ("Error connecting to SQL Server.");
     die(print_r($e));
 }
 
 // SQL Server Extension Sample Code:
-$connectionInfo = array("UID" => "dinoakos", "pwd" => $DBPW , "Database" => "TrafficDb", "LoginTimeout" => 30, "Encrypt" => 1, "TrustServerCertificate" => 0);
+$connectionInfo = array("UID" => "dinoakos", "pwd" => $DBPW, "Database" => "TrafficDb", "LoginTimeout" => 30, "Encrypt" => 1, "TrustServerCertificate" => 0);
 $serverName = "tcp:trafficdb.database.windows.net,1433";
 $conn = sqlsrv_connect($serverName, $connectionInfo);
 
-if ($conn){
-    $tsql= "SELECT * FROM [dbo].[testtable]";
-    $getResults= sqlsrv_query($conn, $tsql);
-    echo ($getResults . PHP_EOL);
+$tsql = "SELECT * FROM [dbo].[testtable]";
+$getResults = sqlsrv_query($conn, $tsql);
+echo ("Reading data from table" . PHP_EOL);
+if ($getResults == FALSE){
+    echo (sqlsrv_errors());
 }
+while ($row = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_ASSOC)) {
+    echo ($row['test'] . PHP_EOL);
+}
+sqlsrv_free_stmt($getResults);
 
-    
+
+
 ?>
