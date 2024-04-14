@@ -134,9 +134,16 @@ $getResults = sqlsrv_query($conn, $tsql);
 
 if (isset($_POST['submit'])) {
     while ($row = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_ASSOC)) {
-        echo ($row['X_cord'] . $row['X_cord'] . PHP_EOL);
+        $resultY=$row['Y_cord']; //47
+        $resultX=$row['X_cord']; //21
+        
+        echo "<script type='text/JavaScript'>  
+            L.circle([$resultY, $resultX],400,{
+            stroke: false,
+            color  : '#ff1234',
+            fillOpacity: 0.7,}).addTo(map);
+            </script>";
     }
-    
 }
 
 
