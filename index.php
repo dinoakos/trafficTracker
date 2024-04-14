@@ -117,7 +117,7 @@ $conn = sqlsrv_connect($serverName, $connectionInfo);
 if ($conn){
     $tsql= "SELECT * FROM [dbo].[testtable]";
     $getResults= sqlsrv_query($conn, $tsql);
-    echo ($getResults);
+    echo ($getResults . PHP_EOL);
 }
 
     
