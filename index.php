@@ -68,11 +68,11 @@
 
                 <hr style="width: 135%;">
 
-                <input type="button" style="width: 135%;">Switch to directional view</button>
+                <input type="submit" style="width: 135%;" value="Switch to directional view">
 
                 <hr style="width: 135%;">
 
-                <input type="button" style="width: 135%;" name='submit'>Search</button>
+                <input type="submit" style="width: 135%;" name='submit' value="search">
 
             </div>
 
