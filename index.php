@@ -95,6 +95,7 @@
         crossorigin="anonymous"></script>
 
     <script src="./website/index.js"></script>
+
 </body>
 
 </html>
@@ -128,8 +129,14 @@ while ($row = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_ASSOC)) {
 }
 sqlsrv_free_stmt($getResults);
 
+$tsql = "SELECT X_cord,Y_cord FROM [dbo].[sample]";
+$getResults = sqlsrv_query($conn, $tsql);
+
 if (isset($_POST['submit'])) {
-    echo "Search";
+    while ($row = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_ASSOC)) {
+        echo ($row['X_cord'] . $row['X_cord'] . PHP_EOL);
+    }
+    
 }
 
 
