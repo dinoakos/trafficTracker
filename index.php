@@ -24,11 +24,11 @@
             <div class="col-md-8 style='border: 1px solid red">
                 <div id="map"></div>
             </div>
-
+            <form method='post'>
             <div class="col-md-4 style='border: 1px solid red">
                 <table cellpadding="1" id="ui">
                     <tbody>
-                        <form action='' method='POST'>
+                        
                             <tr id="iPLab">
                                 <td>From date</td>
                                 <td>To date</td>
@@ -57,7 +57,7 @@
                                     </select>
                                 </td>
                             </tr>
-                        </form>
+                        
                     </tbody>
                 </table>
 
@@ -75,6 +75,7 @@
                 <input type="submit" style="width: 135%;" name='submit' value="search">
 
             </div>
+            </form>
 
         </div>
     </div>
@@ -126,9 +127,6 @@ while ($row = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_ASSOC)) {
 }
 sqlsrv_free_stmt($getResults);
 
-
-
-;
 if (isset($_POST['submit'])) {
     echo "Search";
 }
