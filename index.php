@@ -138,7 +138,7 @@ if (isset($_POST['submit'])) {
         $resultX=$row['X_cord']; //21
         
         echo "<script type='text/JavaScript'>  
-            L.circle([$resultY, $resultX],400,{
+            L.circle([$resultY, $resultX],10,{
             stroke: false,
             color  : '#ff1234',
             fillOpacity: 0.7,}).addTo(map);
