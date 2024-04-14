@@ -121,11 +121,12 @@ $getResults = sqlsrv_query($conn, $tsql);
 if ($getResults == FALSE) {
     echo (sqlsrv_errors());
 }
+while ($row = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_ASSOC)) {
+    echo ($row['test'] . PHP_EOL);
+}
+sqlsrv_free_stmt($getResults);
 if(isset($_POST['submit'])){
-    while ($row = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_ASSOC)) {
-        echo ($row['test'] . PHP_EOL);
-    }
-    sqlsrv_free_stmt($getResults);
+    
 }
 
 
