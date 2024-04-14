@@ -100,6 +100,7 @@
 $test = getenv('test');
 echo ($test);
 $DBPW = getenv('DBPW');
+echo ($DBPW);
 
 try {
     $conn = new PDO("sqlsrv:server = tcp:trafficdb.database.windows.net,1433; Database = TrafficDb", "dinoakos", $DBPW);
