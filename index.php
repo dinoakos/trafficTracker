@@ -24,11 +24,12 @@
             <div class="col-md-8 style='border: 1px solid red">
                 <div id="map"></div>
             </div>
-            <form method='post'>
+
             <div class="col-md-4 style='border: 1px solid red">
-                <table cellpadding="1" id="ui">
-                    <tbody>
-                        
+                <form method='post'>
+                    <table cellpadding="1" id="ui">
+                        <tbody>
+
                             <tr id="iPLab">
                                 <td>From date</td>
                                 <td>To date</td>
@@ -57,25 +58,25 @@
                                     </select>
                                 </td>
                             </tr>
-                        
-                    </tbody>
-                </table>
 
-                <hr style="width: 135%;">
+                        </tbody>
+                    </table>
 
-                <input type="text" id="streetSearch" placeholder="Search for a street" title="Type in an address"
-                    style="border-radius: 10px; width: 135%;"> <!--Replace this with Nominatim implementation-->
+                    <hr style="width: 135%;">
 
-                <hr style="width: 135%;">
+                    <input type="text" id="streetSearch" placeholder="Search for a street" title="Type in an address"
+                        style="border-radius: 10px; width: 135%;"> <!--Replace this with Nominatim implementation-->
 
-                <input type="submit" style="width: 135%;" value="Switch to directional view">
+                    <hr style="width: 135%;">
 
-                <hr style="width: 135%;">
+                    <input type="submit" style="width: 135%;" value="Switch to directional view">
 
-                <input type="submit" style="width: 135%;" name='submit' value="search">
+                    <hr style="width: 135%;">
 
+                    <input type="submit" style="width: 135%;" name='submit' value="search">
+                </form>
             </div>
-            </form>
+
 
         </div>
     </div>
