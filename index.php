@@ -146,9 +146,10 @@ if (isset($_POST['submit'])) {
             fillOpacity: 0.7,}).addTo(map);
             </script>";
     }
-}
-for ($i = 0; $i < count($inputs); $i++) {
-    echo $inputs[$i];
+    for ($i = 0; $i < count($inputs); $i++) {
+        echo $inputs[$i];
+    }
+    
 }
 
 
