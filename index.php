@@ -146,8 +146,23 @@ if (isset($_POST['submit'])) {
             fillOpacity: 0.7,}).addTo(map);
             </script>";
     }
-    for ($i = 0; $i < count($inputs); $i++) {
-        echo $inputs[$i];
+    if(!$_POST["date-start"]){
+        echo "nincs start date";
+    }
+    if(!$_POST["date-end"]){
+        echo "nincs end date";
+    }
+    if(!$_POST["timeFrom"]){
+        echo "nincs timeFrom";
+    }
+    if(!$_POST["timeTo"]){
+        echo "nincs timeTo";
+    }
+    if(!$_POST["DayOfWeek"]){
+        echo "nincs DayOfWeek";
+    }
+    if(!$_POST["Street"]){
+        echo "nincs Street";
     }
     
 }
