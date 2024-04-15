@@ -148,21 +148,33 @@ if (isset($_POST['submit'])) {
     }
     if(!$_POST["date-start"]){
         echo "nincs start date";
+    }else{
+        echo $_POST["date-start"];
     }
     if(!$_POST["date-end"]){
         echo "nincs end date";
+    }else{
+        echo $_POST["date-end"];
     }
     if(!$_POST["timeFrom"]){
         echo "nincs timeFrom";
+    }else{
+        echo $_POST["timeFrom"];
     }
     if(!$_POST["timeTo"]){
         echo "nincs timeTo";
+    }else{
+        echo $_POST["timeTo"];
     }
     if(!$_POST["DayOfWeek"]){
         echo "nincs DayOfWeek";
+    }else{
+        echo $_POST["DayOfWeek"];
     }
     if(!$_POST["Street"]){
         echo "nincs Street";
+    }else{
+        echo $_POST["Street"];
     }
     
 }
