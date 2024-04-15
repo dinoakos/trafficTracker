@@ -136,7 +136,7 @@ if (isset($_POST['submit'])) {
 
     $inputs = array($_POST["date-start"], $_POST["date-end"], $_POST["timeFrom"], $_POST["timeTo"], $_POST["DayOfWeek"], $_POST["Street"]);
 
-    if ($_POST["date-start"] && !$_POST["date-end"]) {
+    if ($_POST["date-start"]) {
         $tsql = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] WHERE DataDate LIKE '$inputs[0]'";
         $getResults = sqlsrv_query($conn, $tsql);
 
