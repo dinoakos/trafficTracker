@@ -129,7 +129,7 @@ if (isset($_POST['submit'])) {
     $street=$_POST["Street"];
 
     //if ($_POST["date-start"]) {
-        $tsql = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] WHERE DataDate LIKE '$start%'";
+        $tsql = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] WHERE Street='$street'";
         $getResults = sqlsrv_query($conn, $tsql);
 
     //}
