@@ -129,17 +129,20 @@ while ($row = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_ASSOC)) {
     echo ($row['test'] . PHP_EOL);
 }
 sqlsrv_free_stmt($getResults); */
-echo $_POST["date-start"], $_POST["date-end"], $_POST["timeFrom"], $_POST["timeTo"], $_POST["DayOfWeek"], $_POST["Street"];
-$inputs = array($_POST["date-start"], $_POST["date-end"], $_POST["timeFrom"], $_POST["timeTo"], $_POST["DayOfWeek"], $_POST["Street"]);
+
 
 
 if (isset($_POST['submit'])) {
-    if($_POST["date-start"] && !$_POST["date-end"] && !$_POST["timeFrom"] && !$_POST["timeTo"] && $_POST["DayOfWeek"]=='None' && !$_POST["Street"]){
+
+    echo $_POST["date-start"], $_POST["date-end"], $_POST["timeFrom"], $_POST["timeTo"], $_POST["DayOfWeek"], $_POST["Street"];
+    $inputs = array($_POST["date-start"], $_POST["date-end"], $_POST["timeFrom"], $_POST["timeTo"], $_POST["DayOfWeek"], $_POST["Street"]);
+
+    if ($_POST["date-start"] && !$_POST["date-end"] && !$_POST["timeFrom"] && !$_POST["timeTo"] && $_POST["DayOfWeek"] == 'None' && !$_POST["Street"]) {
         $tsql = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] WHERE DataDate LIKE '$inputs[0]'";
         $getResults = sqlsrv_query($conn, $tsql);
 
     }
-        
+
     while ($row = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_ASSOC)) {
         $resultY = $row['Y_cord']; //47
         $resultX = $row['X_cord']; //21
@@ -151,37 +154,37 @@ if (isset($_POST['submit'])) {
             fillOpacity: 0.7,}).addTo(map);
             </script>";
     }
-    if(!$_POST["date-start"]){
+    if (!$_POST["date-start"]) {
         echo "nincs start date";
-    }else{
+    } else {
         echo $_POST["date-start"];
     }
-    if(!$_POST["date-end"]){
+    if (!$_POST["date-end"]) {
         echo "nincs end date";
-    }else{
+    } else {
         echo $_POST["date-end"];
     }
-    if(!$_POST["timeFrom"]){
+    if (!$_POST["timeFrom"]) {
         echo "nincs timeFrom";
-    }else{
+    } else {
         echo $_POST["timeFrom"];
     }
-    if(!$_POST["timeTo"]){
+    if (!$_POST["timeTo"]) {
         echo "nincs timeTo";
-    }else{
+    } else {
         echo $_POST["timeTo"];
     }
-    if(!$_POST["DayOfWeek"]){
+    if (!$_POST["DayOfWeek"]) {
         echo "nincs DayOfWeek";
-    }else{
+    } else {
         echo $_POST["DayOfWeek"];
     }
-    if(!$_POST["Street"]){
+    if (!$_POST["Street"]) {
         echo "nincs Street";
-    }else{
+    } else {
         echo $_POST["Street"];
     }
-    
+
 }
 
 
