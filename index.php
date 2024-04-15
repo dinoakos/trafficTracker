@@ -134,10 +134,9 @@ sqlsrv_free_stmt($getResults); */
 
 if (isset($_POST['submit'])) {
 
-    echo $_POST["date-start"], $_POST["date-end"], $_POST["timeFrom"], $_POST["timeTo"], $_POST["DayOfWeek"], $_POST["Street"];
     $inputs = array($_POST["date-start"], $_POST["date-end"], $_POST["timeFrom"], $_POST["timeTo"], $_POST["DayOfWeek"], $_POST["Street"]);
 
-    if ($_POST["date-start"] && !$_POST["date-end"] && !$_POST["timeFrom"] && !$_POST["timeTo"] && $_POST["DayOfWeek"] == 'None' && !$_POST["Street"]) {
+    if ($_POST["date-start"] && !$_POST["date-end"]) {
         $tsql = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] WHERE DataDate LIKE '$inputs[0]'";
         $getResults = sqlsrv_query($conn, $tsql);
 
