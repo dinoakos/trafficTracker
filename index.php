@@ -118,7 +118,7 @@ $connectionInfo = array("UID" => "dinoakos", "pwd" => $DBPW, "Database" => "Traf
 $serverName = "tcp:trafficdb.database.windows.net,1433";
 $conn = sqlsrv_connect($serverName, $connectionInfo);
 
-$tsql = "SELECT * FROM [dbo].[testtable]";
+/* $tsql = "SELECT * FROM [dbo].[testtable]";
 $getResults = sqlsrv_query($conn, $tsql);
 
 if ($getResults == FALSE) {
@@ -127,9 +127,9 @@ if ($getResults == FALSE) {
 while ($row = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_ASSOC)) {
     echo ($row['test'] . PHP_EOL);
 }
-sqlsrv_free_stmt($getResults);
+sqlsrv_free_stmt($getResults); */
 
-$tsql = "SELECT X_cord,Y_cord FROM [dbo].[sample]";
+$tsql = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] WHERE Street='Nyugati utca'";
 $getResults = sqlsrv_query($conn, $tsql);
 
 if (isset($_POST['submit'])) {
@@ -145,6 +145,7 @@ if (isset($_POST['submit'])) {
             </script>";
     }
 }
+sqlsrv_free_stmt($getResults);
 
 
 
