@@ -131,10 +131,15 @@ while ($row = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_ASSOC)) {
 sqlsrv_free_stmt($getResults); */
 echo $_POST["date-start"], $_POST["date-end"], $_POST["timeFrom"], $_POST["timeTo"], $_POST["DayOfWeek"], $_POST["Street"];
 $inputs = array($_POST["date-start"], $_POST["date-end"], $_POST["timeFrom"], $_POST["timeTo"], $_POST["DayOfWeek"], $_POST["Street"]);
-$tsql = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] WHERE Street='Nyugati utca' AND DataDate LIKE '2020.01.09%'";
-$getResults = sqlsrv_query($conn, $tsql);
+
 
 if (isset($_POST['submit'])) {
+    if($_POST["date-start"] && !$_POST["date-end"] && !$_POST["timeFrom"] && !$_POST["timeTo"] && $_POST["DayOfWeek"]=='None' && !$_POST["Street"]){
+        $tsql = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] WHERE DataDate LIKE $inputs[0]";
+        $getResults = sqlsrv_query($conn, $tsql);
+
+    }
+        
     while ($row = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_ASSOC)) {
         $resultY = $row['Y_cord']; //47
         $resultX = $row['X_cord']; //21
