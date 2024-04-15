@@ -43,7 +43,7 @@
                                 <td><input type="date" id="endDate" name="date-end" /></td>
                                 <!-- value="2023-01-01" min="2023-01-01" max="2023-12-31" -->
                                 <td><input type="time" id="time1" name="timeFrom" /></td>
-                                <td><input type="time" id="time1" name="timeFrom" /></td>
+                                <td><input type="time" id="time2" name="timeTo" /></td>
                                 <td>
                                     <select id="weekDay" name="DayOfWeek">
                                         <option value="None">---</option>
@@ -65,11 +65,12 @@
                     <hr style="width: 135%;">
 
                     <input type="text" id="streetSearch" placeholder="Search for a street" title="Type in an address"
-                        style="border-radius: 10px; width: 135%;"> <!--Replace this with Nominatim implementation-->
+                        style="border-radius: 10px; width: 135%;" name="Street">
+                    <!--Replace this with Nominatim implementation-->
 
                     <hr style="width: 135%;">
 
-                    <input type="submit" style="width: 135%;" value="Switch to directional view">
+                    <input type="submit" style="width: 135%;" name="switch" value="Switch to directional view">
 
                     <hr style="width: 135%;">
 
@@ -128,15 +129,15 @@ while ($row = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_ASSOC)) {
     echo ($row['test'] . PHP_EOL);
 }
 sqlsrv_free_stmt($getResults); */
-
-$tsql = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] WHERE Street='Nyugati utca'";
+echo $_POST["date-start"], $_POST["date-end"], $_POST["timeFrom"], $_POST["timeTo"], $_POST["DayOfWeek"], $_POST["Street"];
+$tsql = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] WHERE Street='Nyugati utca' AND DataDate LIKE '2020.01.09%'";
 $getResults = sqlsrv_query($conn, $tsql);
 
 if (isset($_POST['submit'])) {
     while ($row = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_ASSOC)) {
-        $resultY=$row['Y_cord']; //47
-        $resultX=$row['X_cord']; //21
-        
+        $resultY = $row['Y_cord']; //47
+        $resultX = $row['X_cord']; //21
+
         echo "<script type='text/JavaScript'>  
             L.circle([$resultY, $resultX],10,{
             stroke: false,
