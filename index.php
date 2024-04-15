@@ -147,6 +147,9 @@ if (isset($_POST['submit'])) {
             </script>";
     }
 }
+for ($i = 0; $i < count($inputs); $i++) {
+    echo $inputs[$i];
+}
 
 
 sqlsrv_free_stmt($getResults);
