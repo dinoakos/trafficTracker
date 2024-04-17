@@ -131,8 +131,10 @@ if (isset($_POST['submit'])) {
     if (!empty($street) &&  empty($start) &&  empty($end) &&  empty($from) &&  empty($to) &&  empty($day)) {
         $tsql = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] WHERE Street='$street'";
         $getResults = sqlsrv_query($conn, $tsql); 
-        
-
+    }
+    if (!empty($street) &&  !empty($start) &&  empty($end) &&  empty($from) &&  empty($to) &&  empty($day)) {
+        $tsql = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] WHERE CONVERT(VARCHAR(25), DataDate, 126) LIKE '$start%' AND Street='$street'";
+        $getResults = sqlsrv_query($conn, $tsql); 
     }
     if(empty($start)){
         echo "null";
