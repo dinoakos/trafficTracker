@@ -128,11 +128,12 @@ if (isset($_POST['submit'])) {
     $day=$_POST["DayOfWeek"];
     $street=$_POST["Street"];
 
-    //if ($_POST["date-start"]) {
-        $tsql = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] WHERE Street='$street'";
-        $getResults = sqlsrv_query($conn, $tsql);
+    if ($_POST["Street"]) {
+        /* $tsql = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] WHERE Street='$street'";
+        $getResults = sqlsrv_query($conn, $tsql); */
+        echo "van street megadva";
 
-    //}
+    }
 
     while ($row = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_ASSOC)) {
         $resultY = $row['Y_cord']; //47
@@ -145,36 +146,7 @@ if (isset($_POST['submit'])) {
             fillOpacity: 0.7,}).addTo(map);
             </script>";
     }
-    if (!$_POST["date-start"]) {
-        echo "nincs start date";
-    } else {
-        echo $_POST["date-start"];
-    }
-    if (!$_POST["date-end"]) {
-        echo "nincs end date";
-    } else {
-        echo $_POST["date-end"];
-    }
-    if (!$_POST["timeFrom"]) {
-        echo "nincs timeFrom";
-    } else {
-        echo $_POST["timeFrom"];
-    }
-    if (!$_POST["timeTo"]) {
-        echo "nincs timeTo";
-    } else {
-        echo $_POST["timeTo"];
-    }
-    if (!$_POST["DayOfWeek"]) {
-        echo "nincs DayOfWeek";
-    } else {
-        echo $_POST["DayOfWeek"];
-    }
-    if (!$_POST["Street"]) {
-        echo "nincs Street";
-    } else {
-        echo $_POST["Street"];
-    }
+    
 
 }
 
