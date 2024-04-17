@@ -123,6 +123,7 @@ if (isset($_POST['submit'])) {
 
     $start=str_replace("-",".",$_POST["date-start"]);
     $end=str_replace("-",".",$_POST["date-end"]);
+    echo $_POST["timeFrom"];
     $from=$_POST["timeFrom"];
     $to=$_POST["timeTo"];
     $day=$_POST["DayOfWeek"];
@@ -169,7 +170,7 @@ if (isset($_POST['submit'])) {
         echo $start;
     }
     
-   echo $from;
+   
 
     while ($row = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_ASSOC)) {
         $resultY = $row['Y_cord']; //47
