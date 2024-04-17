@@ -169,9 +169,7 @@ if (isset($_POST['submit'])) {
         echo $start;
     }
     
-    if(empty($start)){
-        echo "null";
-    }
+   echo $from;
 
     while ($row = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_ASSOC)) {
         $resultY = $row['Y_cord']; //47
