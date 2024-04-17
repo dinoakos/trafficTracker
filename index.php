@@ -148,21 +148,27 @@ if (isset($_POST['submit'])) {
     }
     if ($_POST["date-start"]) {
         echo $start;
+        echo "dates";
     }
     if ($_POST["date-end"]) {
         echo $end;
+        echo "datee";
     } 
     if ($_POST["timeFrom"]) {
         echo $from;
+        echo "tf";
     }
     if ($_POST["timeTo"]) {
         echo $to;
+        echo "tt";
     }
     if ($_POST["DayOfWeek"]) {
         echo $day;
+        echo "day";
     }
     if ($_POST["Street"]) {
         echo $street;
+        echo "street";
     }
 
 }
