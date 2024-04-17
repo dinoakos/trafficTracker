@@ -146,7 +146,7 @@ if (isset($_POST['submit'])) {
     }
     //utca start and end date
     if (!empty($street) &&  !empty($start) &&  !empty($end) &&  empty($from) &&  empty($to) &&  empty($day)) {
-        $tsql = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] WHERE CONVERT(VARCHAR(25), DataDate, 126) < '$start%' AND CONVERT(VARCHAR(25), DataDate, 126) > '$end%' AND Street='$street'";
+        $tsql = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] WHERE CONVERT(VARCHAR(25), DataDate, 126) > '$start%' AND CONVERT(VARCHAR(25), DataDate, 126) < '$end%' AND Street='$street'";
         $getResults = sqlsrv_query($conn, $tsql); 
         echo $start;
     }
