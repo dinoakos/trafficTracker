@@ -127,13 +127,26 @@ if (isset($_POST['submit'])) {
     $to=$_POST["timeTo"];
     $day=$_POST["DayOfWeek"];
     $street=$_POST["Street"];
-
+    //utca
     if (!empty($street) &&  empty($start) &&  empty($end) &&  empty($from) &&  empty($to) &&  empty($day)) {
         $tsql = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] WHERE Street='$street'";
         $getResults = sqlsrv_query($conn, $tsql); 
     }
+    //utca start date
     if (!empty($street) &&  !empty($start) &&  empty($end) &&  empty($from) &&  empty($to) &&  empty($day)) {
-        $tsql = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] WHERE CONVERT(VARCHAR(25), DataDate, 126) LIKE '$start%' AND Street='$street'";
+        $tsql = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] WHERE CONVERT(VARCHAR(25), DataDate, 126) > '$start%' AND Street='$street'";
+        $getResults = sqlsrv_query($conn, $tsql); 
+        echo $start;
+    }
+    //utca end date
+    if (!empty($street) &&  empty($start) &&  !empty($end) &&  empty($from) &&  empty($to) &&  empty($day)) {
+        $tsql = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] WHERE CONVERT(VARCHAR(25), DataDate, 126) < '$end%' AND Street='$street'";
+        $getResults = sqlsrv_query($conn, $tsql); 
+        echo $start;
+    }
+    //utca start and end date
+    if (!empty($street) &&  !empty($start) &&  !empty($end) &&  empty($from) &&  empty($to) &&  empty($day)) {
+        $tsql = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] WHERE CONVERT(VARCHAR(25), DataDate, 126) < '$start%' AND CONVERT(VARCHAR(25), DataDate, 126) > '$end%' AND Street='$street'";
         $getResults = sqlsrv_query($conn, $tsql); 
         echo $start;
     }
