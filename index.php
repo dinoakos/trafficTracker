@@ -129,15 +129,17 @@ if (isset($_POST['submit'])) {
     $street=$_POST["Street"];
 
     if ($_POST["Street"]) {
-        /* $tsql = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] WHERE Street='$street'";
-        $getResults = sqlsrv_query($conn, $tsql); */
-        echo "van street megadva";
+        $tsql = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] WHERE Street='$street'";
+        $getResults = sqlsrv_query($conn, $tsql); 
+        
 
     }
 
     if ($_POST["date-start"]) {
         echo $start;
         echo "dates";
+    }else{
+        echo $start;
     }
     if ($_POST["date-end"]) {
         echo $end;
