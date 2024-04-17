@@ -46,7 +46,7 @@
                                 <td><input type="time" id="time2" name="timeTo" /></td>
                                 <td>
                                     <select id="weekDay" name="DayOfWeek">
-                                        <option value="None">---</option>
+                                    <option value="" disabled selected>Select a day</option>
                                         <option value="Monday">Monday</option>
                                         <option value="Tuesday">Tuesday</option>
                                         <option value="Wednesday">Wednesday</option>
