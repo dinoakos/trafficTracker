@@ -128,39 +128,14 @@ if (isset($_POST['submit'])) {
     $day=$_POST["DayOfWeek"];
     $street=$_POST["Street"];
 
-    if ($_POST["Street"]) {
+    if (!empty($street) &&  empty($start) &&  empty($end) &&  empty($from) &&  empty($to) &&  empty($day)) {
         $tsql = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] WHERE Street='$street'";
         $getResults = sqlsrv_query($conn, $tsql); 
         
 
     }
-
-    if ($_POST["date-start"]) {
-        echo $start;
-        echo "dates";
-    }
     if(empty($start)){
         echo "null";
-    }
-    if ($_POST["date-end"]) {
-        echo $end;
-        echo "datee";
-    } 
-    if ($_POST["timeFrom"]) {
-        echo $from;
-        echo "tf";
-    }
-    if ($_POST["timeTo"]) {
-        echo $to;
-        echo "tt";
-    }
-    if ($_POST["DayOfWeek"]) {
-        echo $day;
-        echo "day";
-    }
-    if ($_POST["Street"]) {
-        echo $street;
-        echo "street";
     }
 
     while ($row = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_ASSOC)) {
