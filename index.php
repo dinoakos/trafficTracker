@@ -146,7 +146,36 @@ if (isset($_POST['submit'])) {
             fillOpacity: 0.7,}).addTo(map);
             </script>";
     }
-    
+    if (!$_POST["date-start"]) {
+        echo "nincs start date";
+    } else {
+        echo $start;
+    }
+    if (!$_POST["date-end"]) {
+        echo "nincs end date";
+    } else {
+        echo $end;
+    }
+    if (!$_POST["timeFrom"]) {
+        echo "nincs timeFrom";
+    } else {
+        echo $from;
+    }
+    if (!$_POST["timeTo"]) {
+        echo "nincs timeTo";
+    } else {
+        echo $to;
+    }
+    if (!$_POST["DayOfWeek"]) {
+        echo "nincs DayOfWeek";
+    } else {
+        echo $day;
+    }
+    if (!$_POST["Street"]) {
+        echo "nincs Street";
+    } else {
+        echo $street;
+    }
 
 }
 
