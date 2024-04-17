@@ -135,17 +135,6 @@ if (isset($_POST['submit'])) {
 
     }
 
-    while ($row = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_ASSOC)) {
-        $resultY = $row['Y_cord']; //47
-        $resultX = $row['X_cord']; //21
-
-        echo "<script type='text/JavaScript'>  
-            L.circle([$resultY, $resultX],10,{
-            stroke: false,
-            color  : '#ff1234',
-            fillOpacity: 0.7,}).addTo(map);
-            </script>";
-    }
     if ($_POST["date-start"]) {
         echo $start;
         echo "dates";
@@ -171,6 +160,17 @@ if (isset($_POST['submit'])) {
         echo "street";
     }
 
+    while ($row = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_ASSOC)) {
+        $resultY = $row['Y_cord']; //47
+        $resultX = $row['X_cord']; //21
+
+        echo "<script type='text/JavaScript'>  
+            L.circle([$resultY, $resultX],10,{
+            stroke: false,
+            color  : '#ff1234',
+            fillOpacity: 0.7,}).addTo(map);
+            </script>";
+    }
 }
 
 
