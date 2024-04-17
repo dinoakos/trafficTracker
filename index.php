@@ -138,8 +138,9 @@ if (isset($_POST['submit'])) {
     if ($_POST["date-start"]) {
         echo $start;
         echo "dates";
-    }else{
-        echo $start;
+    }
+    if($start.is_null()){
+        echo "null";
     }
     if ($_POST["date-end"]) {
         echo $end;
