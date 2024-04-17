@@ -150,6 +150,29 @@ if (isset($_POST['submit'])) {
         $getResults = sqlsrv_query($conn, $tsql); 
         echo $start;
     }
+    if (!empty($street) &&  empty($start) &&  empty($end) &&  empty($from) &&  empty($to) &&  empty($day)) {
+        $tsql = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] WHERE Street='$street'";
+        $getResults = sqlsrv_query($conn, $tsql); 
+    }
+    //start date
+    if (!empty($street) &&  !empty($start) &&  empty($end) &&  empty($from) &&  empty($to) &&  empty($day)) {
+        $tsql = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] WHERE CONVERT(VARCHAR(25), DataDate, 126) > '$start%'";
+        $getResults = sqlsrv_query($conn, $tsql); 
+        echo $start;
+    }
+    //end date
+    if (!empty($street) &&  empty($start) &&  !empty($end) &&  empty($from) &&  empty($to) &&  empty($day)) {
+        $tsql = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] WHERE CONVERT(VARCHAR(25), DataDate, 126) < '$end%'";
+        $getResults = sqlsrv_query($conn, $tsql); 
+        echo $start;
+    }
+    //start and end date
+    if (!empty($street) &&  !empty($start) &&  !empty($end) &&  empty($from) &&  empty($to) &&  empty($day)) {
+        $tsql = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] WHERE CONVERT(VARCHAR(25), DataDate, 126) > '$start%' AND CONVERT(VARCHAR(25), DataDate, 126) < '$end%' ";
+        $getResults = sqlsrv_query($conn, $tsql); 
+        echo $start;
+    }
+    
     if(empty($start)){
         echo "null";
     }
