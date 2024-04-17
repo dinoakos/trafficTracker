@@ -121,8 +121,8 @@ $conn = sqlsrv_connect($serverName, $connectionInfo);
 
 if (isset($_POST['submit'])) {
 
-    $start=$_POST["date-start"];
-    $end=$_POST["date-end"];
+    $start=str_replace("-",".",$_POST["date-start"]);
+    $end=str_replace("-",".",$_POST["date-end"]);
     $from=$_POST["timeFrom"];
     $to=$_POST["timeTo"];
     $day=$_POST["DayOfWeek"];
