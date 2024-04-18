@@ -195,36 +195,32 @@ if (isset($_POST['submit'])) {
             }
         } else {
             if ($row['SubType'] == "Beállt a forgalom") {
-                // Rotate the triangle by 45 degrees around its top corner
+                
                 $rotatedTriangle = rotateTriangle($triangle, $row['Direction']);
-
                 echo "<script type='text/JavaScript'>  
-                var latlngs = [
-                [$resultY-0.00007, $resultX-0.00010],
-                [$resultY, $resultX],
-                [$resultY-0.00007, $resultX+0.00010]
-                ];
-                var polyline = L.polyline(latlngs, {color: 'red'}).addTo(map);
+                var latlngs = [";
+                foreach ($rotatedTriangle as $vertex) {
+                    echo "[$vertex[0] , $vertex[1] ],";
+                }
+                echo"];
+                var polyline = L.polyline(latlngs, {color: 'green'}).addTo(map);
                 </script>";
             }
 
             if ($row['SubType'] == "Torlódás nagy forgalommal") {
                 $rotatedTriangle = rotateTriangle($triangle, $row['Direction']);
-
                 echo "<script type='text/JavaScript'>  
-                var latlngs = [
-                [$resultY-0.00007, $resultX-0.00010],
-                [$resultY, $resultX],
-                [$resultY-0.00007, $resultX+0.00010]
-                ];
-                var polyline = L.polyline(latlngs, {color: 'yellow'}).addTo(map);
+                var latlngs = [";
+                foreach ($rotatedTriangle as $vertex) {
+                    echo "[$vertex[0] , $vertex[1] ],";
+                }
+                echo"];
+                var polyline = L.polyline(latlngs, {color: 'green'}).addTo(map);
                 </script>";
             }
 
             if ($row['SubType'] == "Torlódás mérsékelt forgalommal") {
                 $rotatedTriangle = rotateTriangle($triangle, $row['Direction']);
-
-
                 echo "<script type='text/JavaScript'>  
                 var latlngs = [";
                 foreach ($rotatedTriangle as $vertex) {
