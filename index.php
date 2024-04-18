@@ -128,12 +128,12 @@ if (isset($_POST['submit'])) {
     $to=$_POST["timeTo"];
     $day=$_POST["DayOfWeek"];
     $street=$_POST["Street"];
-    //utca
+    /* //utca delete
     if (!empty($street) &&  empty($start) &&  empty($end) &&  empty($from) &&  empty($to) &&  empty($day)) {
         $tsql = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] WHERE Street='$street'";
         $getResults = sqlsrv_query($conn, $tsql); 
     }
-    //test Monday with street 
+    //test Monday with street dlete
     if (!empty($street) &&  empty($start) &&  empty($end) &&  empty($from) &&  empty($to) &&  !empty($day)) {
         echo $day;
         $tsql = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] WHERE DATEPART(weekday ,DataDate) = $day AND Street='$street'";
@@ -202,7 +202,98 @@ if (isset($_POST['submit'])) {
         $getResults = sqlsrv_query($conn, $tsql); 
         echo $start;
     }
-    //implement mondays and later street
+
+    //Mondays
+
+    //1. 2023.01.01-2023.01.02 Monday
+    if (empty($street) &&  !empty($start) &&  !empty($end) &&  empty($from) &&  empty($to) &&  empty($day)) {
+        $tsql = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] WHERE DataDate => CONVERT(datetime,'$start') AND DataDate < CONVERT(datetime,'$end')";
+        $getResults = sqlsrv_query($conn, $tsql); 
+        echo $start;
+    }
+    
+    //2. 2023.01.01 12:00 - 2023-01-02 13:00 Monday
+    if (empty($street) &&  !empty($start) &&  !empty($end) &&  !empty($from) &&  !empty($to) &&  empty($day)) {
+        $tsql = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] WHERE DataDate > CONVERT(datetime,'$start') AND DataDate < CONVERT(datetime,'$end') AND DATEPART(HOUR,CONVERT(DateTime,DataDate)) >= DATEPART(HOUR, '$from') AND DATEPART(HOUR,CONVERT(DateTime,DataDate)) <= DATEPART(HOUR, '$to')";
+        $getResults = sqlsrv_query($conn, $tsql); 
+        echo $start;
+    }
+
+    //3. 2023.01.01 12:00 - 2023-01-02 Monday
+    if (empty($street) &&  !empty($start) &&  !empty($end) &&  !empty($from) &&  empty($to) &&  empty($day)) {
+        $tsql = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] WHERE DataDate > CONVERT(datetime,'$start') AND DataDate < CONVERT(datetime,'$end') AND DATEPART(HOUR,CONVERT(DateTime,DataDate)) >= DATEPART(HOUR, '$from')";
+        $getResults = sqlsrv_query($conn, $tsql); 
+        echo $start;
+    }
+    //4. 2023.01.01  - 2023-01-02 12:00 Monday
+    if (empty($street) &&  !empty($start) &&  !empty($end) &&  empty($from) &&  !empty($to) &&  empty($day)) {
+        $tsql = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] WHERE DataDate > CONVERT(datetime,'$start') AND DataDate < CONVERT(datetime,'$end') AND DATEPART(HOUR,CONVERT(DateTime,DataDate)) <= DATEPART(HOUR, '$to')";
+        $getResults = sqlsrv_query($conn, $tsql); 
+        echo $start;
+    }
+    //5.From Date : 2023.01.01 Monday
+    if (empty($street) &&  !empty($start) &&  empty($end) &&  empty($from) &&  empty($to) &&  empty($day)) {
+        $tsql = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] WHERE DataDate => CONVERT(datetime,'$start')";
+        $getResults = sqlsrv_query($conn, $tsql); 
+        echo $start;
+    }
+    //6.To Date : 2023.01.01 Monday
+    if (empty($street) &&  empty($start) &&  !empty($end) &&  empty($from) &&  empty($to) &&  empty($day)) {
+        $tsql = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] WHERE DataDate < CONVERT(datetime,'$end')";
+        $getResults = sqlsrv_query($conn, $tsql); 
+        echo $start;
+    }
+    //7.From Date : 2023.01.01 12:00 Monday
+    if (empty($street) &&  !empty($start) &&  empty($end) &&  !empty($from) &&  empty($to) &&  empty($day)) {
+        $tsql = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] WHERE DataDate > CONVERT(datetime,'$start') AND DATEPART(HOUR,CONVERT(DateTime,DataDate)) >= DATEPART(HOUR, '$from'";
+        $getResults = sqlsrv_query($conn, $tsql); 
+        echo $start;
+    }
+    //8.To Date : 2023.01.01 12:00 Monday
+    if (empty($street) &&  empty($start) &&  !empty($end) &&  empty($from) &&  !empty($to) &&  empty($day)) {
+        $tsql = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] WHERE DataDate < CONVERT(datetime,'$end') AND DATEPART(HOUR,CONVERT(DateTime,DataDate)) <= DATEPART(HOUR, '$to')";
+        $getResults = sqlsrv_query($conn, $tsql); 
+        echo $start;
+    }
+    //9.From time : 12:00 Monday
+    if (empty($street) &&  empty($start) &&  empty($end) &&  !empty($from) &&  empty($to) &&  empty($day)) {
+        $tsql = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] WHERE DATEPART(HOUR,CONVERT(DateTime,DataDate)) >= DATEPART(HOUR, '$from'";
+        $getResults = sqlsrv_query($conn, $tsql); 
+        echo $start;
+    }
+    //10.To time : 12:00 Monday
+    if (empty($street) &&  empty($start) &&  empty($end) &&  empty($from) &&  !empty($to) &&  empty($day)) {
+        $tsql = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] DATEPART(HOUR,CONVERT(DateTime,DataDate)) <= DATEPART(HOUR, '$to')";
+        $getResults = sqlsrv_query($conn, $tsql); 
+        echo $start;
+    } */
+
+    $tsql = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] WHERE 1=1";
+
+    if(!empty($street)){
+        $streetQuerry = "AND Street='$street'";
+    }
+    if(!empty($start)){
+        $startQuerry = "AND DataDate => CONVERT(datetime,'$start')";
+    }
+    if(!empty($end)){
+        $endQuerry = "AND DataDate < CONVERT(datetime,'$end')";
+    }
+    if(!empty($from)){
+        $fromQuerry = "AND DATEPART(HOUR,CONVERT(DateTime,DataDate)) >= DATEPART(HOUR, '$from'))";
+    }
+    if(!empty($to)){
+        $toQuerry = "AND DATEPART(HOUR,CONVERT(DateTime,DataDate)) < DATEPART(HOUR, '$to'))";
+    }
+    if(!empty($day)){
+        $dayQuerry = "AND DATEPART(weekday ,DataDate) = $day)";
+    }
+
+    $getResults = sqlsrv_query($conn, $tsql); 
+
+    
+    
+
 
     
    

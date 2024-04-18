@@ -51,14 +51,20 @@ In the UI the user will have the option to give timeframe they want to specify, 
 -To Date : 2023.01.01 12:00: the site will display the hotspots around the city, the traffic data will be until 2023.01.01 but only if the timestamp is before 12:00 on any given day.
 -From time : 12:00:  the site will display the hotspots around the city, the traffic data will be from from all days but only after 12:00.
 -To time : 12:00:  the site will display the hotspots around the city, the traffic data will be from from all days but only before 12:00.
+
+
 -Monday :the site will display the hotspots around the city, the traffic data will be from from only Mondays.
--Monday 12:00(from date):the site will display the hotspots around the city, the traffic data will be from from only Mondays from 12:00.
--Monday 12:00(to date):the site will display the hotspots around the city, the traffic data will be from from only Mondays until 12:00.
--2023.01.01 12:00-2023.12.31 Monday : the site will display the hotspots around the city, the traffic data will be from 2023.01.01 to 2023.01.03 but only from Mondays but only if the timestamp is after 12:00.
--2023.01.01-2023.12.31 12:00 Monday : the site will display the hotspots around the city, the traffic data will be from 2023.01.01 to 2023.01.03 but only from Mondays but only if the timestamp is before 12:00.
--2023.01.01 12:00-2023.12.31 13:00 Monday : the site will display the hotspots around the city, the traffic data will be from 2023.01.01 to 2023.01.03 but only from Mondays but only if the timestamp is between 12:00 and 13:00.
+-Monday 2023.01.01-2023.01.02: the site will display the hotspots around the city, the traffic data will be from 2023.01.01 to 2023.01.03 but only on mondays
+-2023.01.01 12:00 - 2023.12.31 13:00 Monday : the site will display the hotspots around the city, the traffic data will be from 2023.01.01 to 2023.01.03 but only from Mondays but only if the timestamp is between 12:00 and 13:00.
+-2023.01.01 12:00 - 2023.12.31 Monday : the site will display the hotspots around the city, the traffic data will be from 2023.01.01 to 2023.01.03 but only from Mondays but only if the timestamp is after 12:00.
+-2023.01.01 - 2023.12.31 12:00 Monday : the site will display the hotspots around the city, the traffic data will be from 2023.01.01 to 2023.01.03 but only from Mondays but only if the timestamp is before 12:00.
 -From Date : 2023.01.01 Monday: the site will display the hotspots around the city, the traffic data will be from 2023.01.01 going forward but only on Mondays.
 -To Date : 2023.01.01 Monday: the site will display the hotspots around the city, the traffic data will be until 2023.01.01 going forward but only on Mondays.
+-Monday From Date : 2023.01.01 12:00 :the site will display the hotspots around the city, the traffic data will be from only Mondays from 2023.01.01. but only after 12:00
+-Monday To Date : 2023.01.01 12:00:the site will display the hotspots around the city, the traffic data will be from only Mondays from 2023.01.01. but only until 12:00.
+-Monday From time : 12:00:  the site will display the hotspots around the city, the traffic data will be from from all days but only after 12:00 but only on Mondays.
+-Monday To time : 12:00:  the site will display the hotspots around the city, the traffic data will be from from all days but only before 12:00 but only on Mondays.
+
 -And one of each of these for street search
 
 
