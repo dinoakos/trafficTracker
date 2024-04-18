@@ -286,7 +286,7 @@ if (isset($_POST['submit'])) {
         $toQuerry = " AND DATEPART(HOUR,CONVERT(DateTime,DataDate)) < DATEPART(HOUR, '$to')";
     }
     if(!empty($day)){
-        $dayQuerry = " AND DATEPART(weekday ,DataDate) = $day)";
+        $dayQuerry = " AND DATEPART(weekday ,DataDate) = $day";
     }
     echo "{$starter}{$streetQuerry}{$startQuerry}{$endQuerry}{$fromQuerry}{$toQuerry}{$dayQuerry}";
     $tsql = "{$starter}{$streetQuerry}{$startQuerry}{$endQuerry}{$fromQuerry}{$toQuerry}{$dayQuerry}";
