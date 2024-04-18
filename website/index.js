@@ -14,3 +14,6 @@ L.circle([47.4310, 21.6247],400,{
     stroke: false,
     color  : '#ff1234',
     fillOpacity: 0.7,}).addTo(map); */
+function viewTog(){
+    console.log("view tog")
+}

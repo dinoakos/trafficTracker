@@ -70,7 +70,7 @@
 
                     <hr style="width: 135%;">
 
-                    <input type="submit" style="width: 135%;" name="switch" value="Switch to directional view">
+                    <Button style="width: 135%;" name="switch" value="Switch to directional view" onclick="viewTog()"></button>
 
                     <hr style="width: 135%;">
 
@@ -268,7 +268,7 @@ if (isset($_POST['submit'])) {
         echo $start;
     } */
 
-    $starter = "SELECT X_cord,Y_cord,SubType FROM [dbo].[TrafficD] WHERE 1=1 ";
+    $starter = "SELECT X_cord,Y_cord,SubType,Direction FROM [dbo].[TrafficD] WHERE 1=1 ";
 
     if (!empty($street)) {
         $streetQuerry = " AND Street='$street'";
