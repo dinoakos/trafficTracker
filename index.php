@@ -268,7 +268,7 @@ if (isset($_POST['submit'])) {
         echo $start;
     } */
 
-    $tsql = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] WHERE 1=1";
+    $starter = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] WHERE 1=1";
 
     if(!empty($street)){
         $streetQuerry = "AND Street='$street'";
@@ -288,7 +288,8 @@ if (isset($_POST['submit'])) {
     if(!empty($day)){
         $dayQuerry = "AND DATEPART(weekday ,DataDate) = $day)";
     }
-
+    echo "{$starter}{$streetQuerry}{$startQuerry}{$endQuerry}{$fromQuerry}{$toQuerry}{$dayQuerry}";
+    $tsql = "{$starter}{$streetQuerry}{$startQuerry}{$endQuerry}{$fromQuerry}{$toQuerry}{$dayQuerry}";
     $getResults = sqlsrv_query($conn, $tsql); 
 
     
