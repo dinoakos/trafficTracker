@@ -191,9 +191,9 @@ if (isset($_POST['submit'])) {
             if ($row['SubType'] == "Beállt a forgalom") {
                 echo "<script type='text/JavaScript'>  
                 var latlngs = [
-                [$tempYOne, $tempXOne],
+                [$resultY-0.00007, $resultX-0.00010],
                 [$resultY, $resultX],
-                [$tempYTwo, $tempXTwo]
+                [$resultY-0.00007, $resultX+0.00010]
                 ];
                 var polyline = L.polyline(latlngs, {color: 'red'}).addTo(map);
                 </script>";
@@ -202,9 +202,9 @@ if (isset($_POST['submit'])) {
             if ($row['SubType'] == "Torlódás nagy forgalommal") {
                 echo "<script type='text/JavaScript'>  
                 var latlngs = [
-                [$tempYOne, $tempXOne],
+                [$resultY-0.00007, $resultX-0.00010],
                 [$resultY, $resultX],
-                [$tempYTwo, $tempXTwo]
+                [$resultY-0.00007, $resultX+0.00010]
                 ];
                 var polyline = L.polyline(latlngs, {color: 'yellow'}).addTo(map);
                 </script>";
@@ -213,9 +213,9 @@ if (isset($_POST['submit'])) {
             if ($row['SubType'] == "Torlódás mérsékelt forgalommal") {
                 echo "<script type='text/JavaScript'>  
                 var latlngs = [
-                [$tempYOne, $tempXOne],
+                [$resultY-0.00007, $resultX-0.00010],
                 [$resultY, $resultX],
-                [$tempYTwo, $tempXTwo]
+                [$resultY-0.00007, $resultX+0.00010]
                 ];
                 var polyline = L.polyline(latlngs, {color: 'green'}).addTo(map);
                 </script>";
