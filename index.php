@@ -302,7 +302,7 @@ if (isset($_POST['submit'])) {
             L.circle([$resultY, $resultX],10,{
             stroke: false,
             color  : '#ff0000',
-            fillOpacity: 0.87,}).addTo(map);
+            fillOpacity: 1,}).addTo(map);
             </script>";
         }
 
@@ -311,7 +311,7 @@ if (isset($_POST['submit'])) {
             L.circle([$resultY, $resultX],10,{
             stroke: false,
             color  : '#f7ff02',
-            fillOpacity: 0.87,}).addTo(map);
+            fillOpacity: 1,}).addTo(map);
             </script>";
         }
         
@@ -320,7 +320,7 @@ if (isset($_POST['submit'])) {
             L.circle([$resultY, $resultX],10,{
             stroke: false,
             color  : '#00ff00',
-            fillOpacity: 0.87,}).addTo(map);
+            fillOpacity: 1,}).addTo(map);
             </script>";
         }
     }
