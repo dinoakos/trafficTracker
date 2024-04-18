@@ -121,15 +121,15 @@ $serverName = "tcp:trafficdb.database.windows.net,1433";
 $conn = sqlsrv_connect($serverName, $connectionInfo);
 
 if (isset($_POST['submit'])) {
-    $mode = 
-    $start = str_replace("-", ".", $_POST["date-start"]);
+    $mode =
+        $start = str_replace("-", ".", $_POST["date-start"]);
     $end = str_replace("-", ".", $_POST["date-end"]);
     echo $_POST["timeFrom"];
     $from = $_POST["timeFrom"];
     $to = $_POST["timeTo"];
     $day = $_POST["DayOfWeek"];
     $street = $_POST["Street"];
-   
+
     $starter = "SELECT X_cord,Y_cord,SubType,Direction FROM [dbo].[TrafficD] WHERE 1=1 ";
 
     if (!empty($street)) {
@@ -158,8 +158,8 @@ if (isset($_POST['submit'])) {
     while ($row = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_ASSOC)) {
         $resultY = $row['Y_cord']; //47
         $resultX = $row['X_cord']; //21
-        
-        if ($row['SubType'] == 	"Beállt a forgalom") {
+
+        if ($row['SubType'] == "Beállt a forgalom") {
             echo "<script type='text/JavaScript'>  
             L.circle([$resultY, $resultX],10,{
             stroke: false,
@@ -168,7 +168,7 @@ if (isset($_POST['submit'])) {
             </script>";
         }
 
-        if ($row['SubType'] == 	"Torlódás nagy forgalommal") {
+        if ($row['SubType'] == "Torlódás nagy forgalommal") {
             echo "<script type='text/JavaScript'>  
             L.circle([$resultY, $resultX],10,{
             stroke: false,
@@ -176,8 +176,8 @@ if (isset($_POST['submit'])) {
             fillOpacity: 1,}).addTo(map);
             </script>";
         }
-        
-        if ($row['SubType'] == 	"Torlódás mérsékelt forgalommal") {
+
+        if ($row['SubType'] == "Torlódás mérsékelt forgalommal") {
             echo "<script type='text/JavaScript'>  
             L.circle([$resultY, $resultX],10,{
             stroke: false,
@@ -186,6 +186,18 @@ if (isset($_POST['submit'])) {
             </script>";
         }
     }
+    echo "<script type='text/JavaScript'>  
+            var latlngs = [
+            [45.51, -122.68],
+            [37.77, -122.43],
+            [34.04, -118.2]
+            ];
+    
+            var polyline = L.polyline(latlngs, {color: 'red'}).addTo(map);
+    
+            // zoom the map to the polyline
+            map.fitBounds(polyline.getBounds());
+            </script>";
 }
 
 
