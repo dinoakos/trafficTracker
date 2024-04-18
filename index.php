@@ -268,13 +268,13 @@ if (isset($_POST['submit'])) {
         echo $start;
     } */
 
-    $starter = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] WHERE 1=1";
+    $starter = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] WHERE 1=1 ";
 
     if(!empty($street)){
         $streetQuerry = "AND Street='$street'";
     }
     if(!empty($start)){
-        $startQuerry = "AND DataDate => CONVERT(datetime,'$start')";
+        $startQuerry = "AND DataDate >= CONVERT(datetime,'$start')";
     }
     if(!empty($end)){
         $endQuerry = "AND DataDate < CONVERT(datetime,'$end')";
