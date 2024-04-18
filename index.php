@@ -203,7 +203,7 @@ if (isset($_POST['submit'])) {
                     echo "[$vertex[0] , $vertex[1] ],";
                 }
                 echo"];
-                var polyline = L.polyline(latlngs, {color: 'green'}).addTo(map);
+                var polyline = L.polyline(latlngs, {color: 'red'}).addTo(map);
                 </script>";
             }
 
@@ -215,7 +215,7 @@ if (isset($_POST['submit'])) {
                     echo "[$vertex[0] , $vertex[1] ],";
                 }
                 echo"];
-                var polyline = L.polyline(latlngs, {color: 'green'}).addTo(map);
+                var polyline = L.polyline(latlngs, {color: 'yellow'}).addTo(map);
                 </script>";
             }
 
