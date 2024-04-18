@@ -188,12 +188,12 @@ if (isset($_POST['submit'])) {
             $yOne= $resultY-0.00007;
             $xOne=$resultX+0.00010;
 
-            echo "$yOne $xOne";
+            echo "yone xone $yOne $xOne ";
 
             $yTwo= $resultY-0.00007;
             $xTwo=$resultX-0.00010;
 
-            echo "$yTwo $xTwo";
+            echo "ytwo xtwo $yTwo $xTwo ";
             
             $tempXOne = $xOne * cos($row['Direction']) - $yOne * sin($row['Direction']);
             $tempYOne = $xOne * sin($row['Direction']) + $yOne * cos($row['Direction']);
@@ -201,8 +201,8 @@ if (isset($_POST['submit'])) {
             $tempXTwo = $xTwo * cos($row['Direction']) - $yTwo * sin($row['Direction']);
             $tempYTwo = $xTwo * sin($row['Direction']) + $yTwo * cos($row['Direction']);
 
-            echo "$tempYOne $tempXOne";
-            echo "$tempYTwo $tempXTwo";
+            echo "tempyone tempxone $tempYOne $tempXOne ";
+            echo "tempYTwo tempXTwo $tempYTwo $tempXTwo ";
 
             
             
