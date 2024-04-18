@@ -185,21 +185,22 @@ if (isset($_POST['submit'])) {
             fillOpacity: 1,}).addTo(map);
             </script>";
             
-            $yDist=$resultY-0.00007;
-            $xDistNeg=$resultX-0.00010;
-            $xDistPos=$resultX+0.00010;
+            $yOne= $resultY-0.00007;
+            $yTwo= $resultY-0.00007;
 
-            $xPos=$xDistPos * cos($row['Direction']) - $yDist * sin($row['Direction']);
-            $yOne=$resultX * cos($row['Direction']) - $yDist * sin($row['Direction']);
+            $xOne=$resultX+0.00010;
+            $xTwo=$resultX-0.00010;
 
-            $xNeg=$xDistNeg * cos($row['Direction']) - $yDist * sin($row['Direction']);
+            
+
+            
             
 
             echo "<script type='text/JavaScript'>  
             var latlngs = [
-            [$yOne, $xNeg],
+            [$yOne, $xOne],
             [$resultY, $resultX],
-            [$yOne, $xPos]
+            [$yTwo, $xTwo]
             ];
     
             var polyline = L.polyline(latlngs, {color: 'green'}).addTo(map);
