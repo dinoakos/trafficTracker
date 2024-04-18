@@ -157,6 +157,12 @@ if (isset($_POST['submit'])) {
     while ($row = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_ASSOC)) {
         $resultY = $row['Y_cord']; //47
         $resultX = $row['X_cord']; //21
+        // Define the vertices of the triangle
+        $triangle = array(
+            array($resultY, $resultX),  // Vertex A (top corner)
+            array($resultY-0.00007, $resultX-0.00010),  // Vertex B
+            array($resultY-0.00007, $resultX+0.00010)   // Vertex C
+        );
 
         if (!isset($_POST['modeButton'])) {
 
@@ -189,6 +195,9 @@ if (isset($_POST['submit'])) {
             }
         } else {
             if ($row['SubType'] == "Beállt a forgalom") {
+                // Rotate the triangle by 45 degrees around its top corner
+                $rotatedTriangle = rotateTriangle($triangle, $row['Direction']);
+
                 echo "<script type='text/JavaScript'>  
                 var latlngs = [
                 [$resultY-0.00007, $resultX-0.00010],
@@ -200,6 +209,8 @@ if (isset($_POST['submit'])) {
             }
 
             if ($row['SubType'] == "Torlódás nagy forgalommal") {
+                $rotatedTriangle = rotateTriangle($triangle, $row['Direction']);
+
                 echo "<script type='text/JavaScript'>  
                 var latlngs = [
                 [$resultY-0.00007, $resultX-0.00010],
@@ -211,65 +222,32 @@ if (isset($_POST['submit'])) {
             }
 
             if ($row['SubType'] == "Torlódás mérsékelt forgalommal") {
+                $rotatedTriangle = rotateTriangle($triangle, $row['Direction']);
+
+
                 echo "<script type='text/JavaScript'>  
-                var latlngs = [
-                [$resultY-0.00007, $resultX-0.00010],
-                [$resultY, $resultX],
-                [$resultY-0.00007, $resultX+0.00010]
-                ];
+                var latlngs = [";
+                foreach ($rotatedTriangle as $vertex) {
+                    echo "[$vertex[0] , $vertex[1] ],";
+                }
+                echo"];
                 var polyline = L.polyline(latlngs, {color: 'green'}).addTo(map);
                 </script>";
 
             }
         }
-        // Define the vertices of the triangle
-        $triangle = array(
-            array($resultY, $resultX),  // Vertex A (top corner)
-            array($resultY-0.00007, $resultX-0.00010),  // Vertex B
-            array($resultY-0.00007, $resultX+0.00010)   // Vertex C
-        );
+        /* [$resultY-0.00007, $resultX-0.00010],
+                [$resultY, $resultX],
+                [$resultY-0.00007, $resultX+0.00010] */
+        
+        
 
-        // Function to rotate a point around another point by a certain angle
-        function rotatePoint($point, $center, $angle)
-        {
-            $s = sin(deg2rad($angle));
-            $c = cos(deg2rad($angle));
-
-            // Translate point back to origin
-            $point[0] -= $center[0];
-            $point[1] -= $center[1];
-
-            // Rotate point
-            $xnew = $point[0] * $c - $point[1] * $s;
-            $ynew = $point[0] * $s + $point[1] * $c;
-
-            // Translate point back
-            $point[0] = $xnew + $center[0];
-            $point[1] = $ynew + $center[1];
-
-            return $point;
-        }
-
-        // Function to rotate a triangle around its top corner (vertex A)
-        function rotateTriangle($triangle, $angle)
-        {
-            $topCorner = $triangle[0]; // Top corner (vertex A)
-
-            $rotatedTriangle = array();
-            foreach ($triangle as $vertex) {
-                $rotatedTriangle[] = rotatePoint($vertex, $topCorner, $angle);
-            }
-
-            return $rotatedTriangle;
-        }
-
-        // Rotate the triangle by 45 degrees around its top corner
-        $rotatedTriangle = rotateTriangle($triangle, $row['Direction']);
+        
 
         // Output the rotated triangle
-        foreach ($rotatedTriangle as $vertex) {
+        /* foreach ($rotatedTriangle as $vertex) {
             echo "($vertex[0], $vertex[1])\n";
-        }
+        } */
     }
 
 }
@@ -287,7 +265,39 @@ if (isset($_POST['submit'])) {
 
 sqlsrv_free_stmt($getResults);
 
+// Function to rotate a point around another point by a certain angle
+function rotatePoint($point, $center, $angle)
+{
+    $s = sin(deg2rad($angle));
+    $c = cos(deg2rad($angle));
 
+    // Translate point back to origin
+    $point[0] -= $center[0];
+    $point[1] -= $center[1];
+
+    // Rotate point
+    $xnew = $point[0] * $c - $point[1] * $s;
+    $ynew = $point[0] * $s + $point[1] * $c;
+
+    // Translate point back
+    $point[0] = $xnew + $center[0];
+    $point[1] = $ynew + $center[1];
+
+    return $point;
+}
+
+// Function to rotate a triangle around its top corner (vertex b)
+function rotateTriangle($triangle, $angle)
+{
+    $topCorner = $triangle[1]; // Top corner (vertex b)
+
+    $rotatedTriangle = array();
+    foreach ($triangle as $vertex) {
+        $rotatedTriangle[] = rotatePoint($vertex, $topCorner, $angle);
+    }
+
+    return $rotatedTriangle;
+}
 
 
 ?>
