@@ -190,12 +190,12 @@ if (isset($_POST['submit'])) {
 
             $xOne=$resultX+0.00010;
             $xTwo=$resultX-0.00010;
+            
+            $tempXOne = $xOne * cos(deg2rad($row['Direction'])) - $yOne * sin(deg2rad($row['Direction']));
+            $tempYOne = $xOne * sin(deg2rad($row['Direction'])) + $yOne * cos(deg2rad($row['Direction']));
 
-            $xOne = $xOne * cos(deg2rad($row['Direction'])) - $yOne * sin(deg2rad($row['Direction']));
-            $yOne = $xOne * sin(deg2rad($row['Direction'])) + $yOne * cos(deg2rad($row['Direction']));
-
-            $xTwo = $xTwo * cos(deg2rad($row['Direction'])) - $yTwo * sin(deg2rad($row['Direction']));
-            $yTwo = $xTwo * sin(deg2rad($row['Direction'])) + $yTwo * cos(deg2rad($row['Direction']));
+            $tempXTwo = $xTwo * cos(deg2rad($row['Direction'])) - $yTwo * sin(deg2rad($row['Direction']));
+            $tempYTwo = $xTwo * sin(deg2rad($row['Direction'])) + $yTwo * cos(deg2rad($row['Direction']));
 
             
 
@@ -204,9 +204,9 @@ if (isset($_POST['submit'])) {
 
             echo "<script type='text/JavaScript'>  
             var latlngs = [
-            [$yOne, $xOne],
+            [$tempYOne, $tempXOne],
             [$resultY, $resultX],
-            [$yTwo, $xTwo]
+            [$tempYTwo, $tempXTwo]
             ];
     
             var polyline = L.polyline(latlngs, {color: 'green'}).addTo(map);
