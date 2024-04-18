@@ -47,13 +47,13 @@
                                 <td>
                                     <select id="weekDay" name="DayOfWeek">
                                     <option value="" disabled selected>Select a day</option>
-                                        <option value="Monday">Monday</option>
-                                        <option value="Tuesday">Tuesday</option>
-                                        <option value="Wednesday">Wednesday</option>
-                                        <option value="Thursday">Thursday</option>
-                                        <option value="Friday">Friday</option>
-                                        <option value="Saturday">Saturday</option>
-                                        <option value="Sunday">Sunday</option>
+                                        <option value="2">Monday</option>
+                                        <option value="3">Tuesday</option>
+                                        <option value="4">Wednesday</option>
+                                        <option value="5">Thursday</option>
+                                        <option value="6">Friday</option>
+                                        <option value="7">Saturday</option>
+                                        <option value="1">Sunday</option>
 
                                     </select>
                                 </td>
@@ -133,90 +133,75 @@ if (isset($_POST['submit'])) {
         $tsql = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] WHERE Street='$street'";
         $getResults = sqlsrv_query($conn, $tsql); 
     }
-    //utca start date
-    if (!empty($street) &&  !empty($start) &&  empty($end) &&  empty($from) &&  empty($to) &&  empty($day)) {
-        $tsql = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] WHERE CONVERT(VARCHAR(25), DataDate, 126) > '$start%' AND Street='$street'";
+    //test Monday with street 
+    if (!empty($street) &&  empty($start) &&  empty($end) &&  empty($from) &&  empty($to) &&  !empty($day)) {
+        $tsql = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] WHERE DATEPART(weekday ,DataDate) = $day AND Street='$street'";
         $getResults = sqlsrv_query($conn, $tsql); 
-        echo $start;
     }
-    //utca end date
-    if (!empty($street) &&  empty($start) &&  !empty($end) &&  empty($from) &&  empty($to) &&  empty($day)) {
-        $tsql = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] WHERE CONVERT(VARCHAR(25), DataDate, 126) < '$end%' AND Street='$street'";
-        $getResults = sqlsrv_query($conn, $tsql); 
-        echo $start;
-    }
-    //utca start and end date
-    if (!empty($street) &&  !empty($start) &&  !empty($end) &&  empty($from) &&  empty($to) &&  empty($day)) {
-        $tsql = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] WHERE CONVERT(VARCHAR(25), DataDate, 126) > '$start%' AND CONVERT(VARCHAR(25), DataDate, 126) < '$end%' AND Street='$street'";
-        $getResults = sqlsrv_query($conn, $tsql); 
-        echo $start;
-    }
-    //start date
-    if (empty($street) &&  !empty($start) &&  empty($end) &&  empty($from) &&  empty($to) &&  empty($day)) {
-        $tsql = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] WHERE CONVERT(VARCHAR(25), DataDate, 126) > '$start%'";
-        $getResults = sqlsrv_query($conn, $tsql); 
-        echo $start;
-    }
-    //end date
-    if (empty($street) &&  empty($start) &&  !empty($end) &&  empty($from) &&  empty($to) &&  empty($day)) {
-        $tsql = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] WHERE CONVERT(VARCHAR(25), DataDate, 126) < '$end%'";
-        $getResults = sqlsrv_query($conn, $tsql); 
-        echo $start;
-    }
-    //start and end date
+   
+    //1. 2023.01.01-2023.01.02
     if (empty($street) &&  !empty($start) &&  !empty($end) &&  empty($from) &&  empty($to) &&  empty($day)) {
-        $tsql = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] WHERE CONVERT(VARCHAR(25), DataDate, 126) > '$start%' AND CONVERT(VARCHAR(25), DataDate, 126) < '$end%' ";
+        $tsql = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] WHERE DataDate => CONVERT(datetime,'$start') AND DataDate < CONVERT(datetime,'$end')";
+        $getResults = sqlsrv_query($conn, $tsql); 
+        echo $start;
+    }
+    
+    //2. 2023.01.01 12:00 - 2023-01-02 13:00
+    if (empty($street) &&  !empty($start) &&  !empty($end) &&  !empty($from) &&  !empty($to) &&  empty($day)) {
+        $tsql = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] WHERE DataDate > CONVERT(datetime,'$start') AND DataDate < CONVERT(datetime,'$end') AND DATEPART(HOUR,CONVERT(DateTime,DataDate)) >= DATEPART(HOUR, '$from') AND DATEPART(HOUR,CONVERT(DateTime,DataDate)) <= DATEPART(HOUR, '$to')";
         $getResults = sqlsrv_query($conn, $tsql); 
         echo $start;
     }
 
-
-
-
-    //utca from
-    if (!empty($street) &&  empty($start) &&  empty($end) &&  !empty($from) &&  empty($to) &&  empty($day)) {
-        $tsql = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] WHERE Street='$street' AND CONVERT(VARCHAR(25), DataDate, 126) > '%$from'";
-        $getResults = sqlsrv_query($conn, $tsql); 
-    }
-    //utca start date from
-    if (!empty($street) &&  !empty($start) &&  empty($end) &&  !empty($from) &&  empty($to) &&  empty($day)) {
-        $tsql = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] WHERE CONVERT(VARCHAR(25), DataDate, 126) > '$start $from' AND Street='$street'";
-        $getResults = sqlsrv_query($conn, $tsql); 
-        echo $start;
-    }
-    //utca end date from
-    if (!empty($street) &&  empty($start) &&  !empty($end) &&  !empty($from) &&  empty($to) &&  empty($day)) {
-        $tsql = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] WHERE CONVERT(VARCHAR(25), DataDate, 126) < '$end%' AND Street='$street' AND CONVERT(VARCHAR(25), DataDate, 126) > '%$from'";
-        $getResults = sqlsrv_query($conn, $tsql); 
-        echo $start;
-    }
-    //utca start and end date from
-    if (!empty($street) &&  !empty($start) &&  !empty($end) &&  !empty($from) &&  empty($to) &&  empty($day)) {
-        $tsql = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] WHERE CONVERT(VARCHAR(25), DataDate, 126) > '$start $from' AND CONVERT(VARCHAR(25), DataDate, 126) < '$end%' AND Street='$street'";
-        $getResults = sqlsrv_query($conn, $tsql); 
-        echo $start;
-    }
-    //start date from
-    if (empty($street) &&  !empty($start) &&  empty($end) &&  !empty($from) &&  empty($to) &&  empty($day)) {
-        $tsql = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] WHERE CONVERT(VARCHAR(25), DataDate, 126) > '$start $from'";
-        $getResults = sqlsrv_query($conn, $tsql); 
-        echo $start;
-    }
-    //end date
-    if (empty($street) &&  empty($start) &&  !empty($end) &&  !empty($from) &&  empty($to) &&  empty($day)) {
-        $tsql = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] WHERE CONVERT(VARCHAR(25), DataDate, 126) < '$end%' AND CONVERT(VARCHAR(25), DataDate, 126) > '%$from'";
-        $getResults = sqlsrv_query($conn, $tsql); 
-        echo $start;
-    }
-    //start and end date
+    //3. 2023.01.01 12:00 - 2023-01-02
     if (empty($street) &&  !empty($start) &&  !empty($end) &&  !empty($from) &&  empty($to) &&  empty($day)) {
-        $tsql = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] WHERE CONVERT(VARCHAR(25), DataDate, 126) > '$start $from' AND CONVERT(VARCHAR(25), DataDate, 126) < '$end%' ";
+        $tsql = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] WHERE DataDate > CONVERT(datetime,'$start') AND DataDate < CONVERT(datetime,'$end') AND DATEPART(HOUR,CONVERT(DateTime,DataDate)) >= DATEPART(HOUR, '$from')";
         $getResults = sqlsrv_query($conn, $tsql); 
         echo $start;
     }
-
-
-
+    //4. 2023.01.01  - 2023-01-02 12:00
+    if (empty($street) &&  !empty($start) &&  !empty($end) &&  empty($from) &&  !empty($to) &&  empty($day)) {
+        $tsql = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] WHERE DataDate > CONVERT(datetime,'$start') AND DataDate < CONVERT(datetime,'$end') AND DATEPART(HOUR,CONVERT(DateTime,DataDate)) <= DATEPART(HOUR, '$to')";
+        $getResults = sqlsrv_query($conn, $tsql); 
+        echo $start;
+    }
+    //5.From Date : 2023.01.01
+    if (empty($street) &&  !empty($start) &&  empty($end) &&  empty($from) &&  empty($to) &&  empty($day)) {
+        $tsql = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] WHERE DataDate => CONVERT(datetime,'$start')";
+        $getResults = sqlsrv_query($conn, $tsql); 
+        echo $start;
+    }
+    //6.To Date : 2023.01.01
+    if (empty($street) &&  empty($start) &&  !empty($end) &&  empty($from) &&  empty($to) &&  empty($day)) {
+        $tsql = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] WHERE DataDate < CONVERT(datetime,'$end')";
+        $getResults = sqlsrv_query($conn, $tsql); 
+        echo $start;
+    }
+    //7.From Date : 2023.01.01 12:00
+    if (empty($street) &&  !empty($start) &&  empty($end) &&  !empty($from) &&  empty($to) &&  empty($day)) {
+        $tsql = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] WHERE DataDate > CONVERT(datetime,'$start') AND DATEPART(HOUR,CONVERT(DateTime,DataDate)) >= DATEPART(HOUR, '$from'";
+        $getResults = sqlsrv_query($conn, $tsql); 
+        echo $start;
+    }
+    //8.To Date : 2023.01.01 12:00
+    if (empty($street) &&  empty($start) &&  !empty($end) &&  empty($from) &&  !empty($to) &&  empty($day)) {
+        $tsql = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] WHERE DataDate < CONVERT(datetime,'$end') AND DATEPART(HOUR,CONVERT(DateTime,DataDate)) <= DATEPART(HOUR, '$to')";
+        $getResults = sqlsrv_query($conn, $tsql); 
+        echo $start;
+    }
+    //9.From time : 12:00
+    if (empty($street) &&  empty($start) &&  empty($end) &&  !empty($from) &&  empty($to) &&  empty($day)) {
+        $tsql = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] WHERE DATEPART(HOUR,CONVERT(DateTime,DataDate)) >= DATEPART(HOUR, '$from'";
+        $getResults = sqlsrv_query($conn, $tsql); 
+        echo $start;
+    }
+    //10.To time : 12:00
+    if (empty($street) &&  empty($start) &&  empty($end) &&  empty($from) &&  !empty($to) &&  empty($day)) {
+        $tsql = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] DATEPART(HOUR,CONVERT(DateTime,DataDate)) <= DATEPART(HOUR, '$to')";
+        $getResults = sqlsrv_query($conn, $tsql); 
+        echo $start;
+    }
+    //implement mondays and later street
 
     
    

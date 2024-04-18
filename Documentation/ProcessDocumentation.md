@@ -40,14 +40,27 @@ A readable and user-friendly UI which the visitors of the site can intuitively r
 Python code that will take the complex and large amount data and remove all unnecessary nodes from the graph. Reasoning for this is that if at the end of the street there is traffic then logically the whole street has traffic and including it would only make the site slower and more resource intensive.
 ### Time and date specification
 In the UI the user will have the option to give timeframe they want to specify, and the site will display that data only. The specification will be pretty loose considering the user will be able to input just about any information and the site will “try it’s best” to give results. Examples:
-- 2023-01-01: the site will show all of Debrecen and display the hotspots around the city, the traffic data will be averaged so for any given node all timestamps from that day will be included. This will of course reduce accuracy but even this data can be useful for the user so they should have the option to see it.
-- 2023-01-01 – 2023-02-1: Same with the single date but will average the result day by day.
-- 2023-01-01 ; 12:00: Only data from 2023 January 1st at noon will be displayed
-- 2023-01-01 – 2023-02-01 ; 12:00: the result with the timestamp of noon will be averaged from January 1st to February 1st.
-- 12:00: All data will be used but only with the timestamp of noon.
-- Monday: All available data origination from a Monday will be used.
-- Monday 12:00: All available data origination from a Monday with a timestamp of noon will be used.
-- 2023-01-01 – 2023-02-01 Monday: All data which originates from a Monday between January 1st and February 1st will be averaged.
+
+-2023.01.01-2023.01.02: the site will display the hotspots around the city, the traffic data will be from 2023.01.01 to 2023.01.03
+-2023.01.01 12:00 - 2023-01-02 13:00: the site will display the hotspots around the city, the traffic data will be from 2023.01.01 to 2023.01.03 but only if the timestamp is after 12:00 and before 13:00 on any given day.
+-2023.01.01 12:00 - 2023-01-02: the site will display the hotspots around the city, the traffic data will be from 2023.01.01 to 2023.01.03 but only if the timestamp is after 12:00 on any given day.
+-2023.01.01  - 2023-01-02 12:00: the site will display the hotspots around the city, the traffic data will be from 2023.01.01 to 2023.01.03 but only if the timestamp is before 12:00 on any given day.
+-From Date : 2023.01.01: the site will display the hotspots around the city, the traffic data will be from 2023.01.01 going forward.
+-To Date : 2023.01.01: the site will display the hotspots around the city, the traffic data will be until 2023.01.01.
+-From Date : 2023.01.01 12:00: the site will display the hotspots around the city, the traffic data will be from 2023.01.01 going forward but only if the timestamp is after 12:00 on any given day.
+-To Date : 2023.01.01 12:00: the site will display the hotspots around the city, the traffic data will be until 2023.01.01 but only if the timestamp is before 12:00 on any given day.
+-From time : 12:00:  the site will display the hotspots around the city, the traffic data will be from from all days but only after 12:00.
+-To time : 12:00:  the site will display the hotspots around the city, the traffic data will be from from all days but only before 12:00.
+-Monday :the site will display the hotspots around the city, the traffic data will be from from only Mondays.
+-Monday 12:00(from date):the site will display the hotspots around the city, the traffic data will be from from only Mondays from 12:00.
+-Monday 12:00(to date):the site will display the hotspots around the city, the traffic data will be from from only Mondays until 12:00.
+-2023.01.01 12:00-2023.12.31 Monday : the site will display the hotspots around the city, the traffic data will be from 2023.01.01 to 2023.01.03 but only from Mondays but only if the timestamp is after 12:00.
+-2023.01.01-2023.12.31 12:00 Monday : the site will display the hotspots around the city, the traffic data will be from 2023.01.01 to 2023.01.03 but only from Mondays but only if the timestamp is before 12:00.
+-2023.01.01 12:00-2023.12.31 13:00 Monday : the site will display the hotspots around the city, the traffic data will be from 2023.01.01 to 2023.01.03 but only from Mondays but only if the timestamp is between 12:00 and 13:00.
+-From Date : 2023.01.01 Monday: the site will display the hotspots around the city, the traffic data will be from 2023.01.01 going forward but only on Mondays.
+-To Date : 2023.01.01 Monday: the site will display the hotspots around the city, the traffic data will be until 2023.01.01 going forward but only on Mondays.
+-And one of each of these for street search
+
 
 
 ### Hotspot view(default)
@@ -67,3 +80,5 @@ Python - Python is a scripting language which works well with large sets of data
 OpenStreetMap - OpenStreetMap is a free, editable map of the whole world that is being built by volunteers largely from scratch and released with an open-content license.
 
 Leaflet - Leaflet is the leading open-source JavaScript library for mobile-friendly interactive maps. Weighing just about 42 KB of JS, it has all the mapping features most developers ever need. 
+
+Azure - Microsoft Azure is a cloud computing platform. In this project I'm using Azure web app for hosting the web app and Azure SQL Database to host the database.
