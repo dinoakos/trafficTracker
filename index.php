@@ -70,7 +70,7 @@
 
                     <hr style="width: 135%;">
 
-                    <Button style="width: 135%;" id="switch" onclick="return viewTog()">Switch to directional view</button>
+                    <Button style="width: 135%;" id="switch" onclick="viewTog();return false;">Switch to directional view</button>
 
                     <hr style="width: 135%;">
 
