@@ -39,3 +39,6 @@ body {
 #iPLab{
   color: antiquewhite;
 }
+*[fill="#f7ff02"] {
+  z-index: 100;
+}
