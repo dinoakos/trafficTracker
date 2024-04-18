@@ -187,9 +187,9 @@ if (isset($_POST['submit'])) {
 
             echo "<script type='text/JavaScript'>  
             var latlngs = [
-            [$resultY-0.01, $resultX-0.01],
+            [$resultY-0.00007, $resultX-0.00010],
             [$resultY, $resultX],
-            [$resultY-0.01, $resultX-0.01]
+            [$resultY-0.00007, $resultX+0.00010]
             ];
     
             var polyline = L.polyline(latlngs, {color: 'green'}).addTo(map);
