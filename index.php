@@ -191,6 +191,12 @@ if (isset($_POST['submit'])) {
             $xOne=$resultX+0.00010;
             $xTwo=$resultX-0.00010;
 
+            $xOne = $xOne * cos(deg2rad($row['Direction'])) - $yOne * sin(deg2rad($row['Direction']));
+            $yOne = $xOne * sin(deg2rad($row['Direction'])) + $yOne * cos(deg2rad($row['Direction']));
+
+            $xTwo = $xTwo * cos(deg2rad($row['Direction'])) - $yTwo * sin(deg2rad($row['Direction']));
+            $yTwo = $xTwo * sin(deg2rad($row['Direction'])) + $yTwo * cos(deg2rad($row['Direction']));
+
             
 
             
@@ -212,6 +218,7 @@ if (isset($_POST['submit'])) {
 
 
 sqlsrv_free_stmt($getResults);
+
 
 
 
