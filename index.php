@@ -46,7 +46,7 @@
                                 <td><input type="time" id="time2" name="timeTo" /></td>
                                 <td>
                                     <select id="weekDay" name="DayOfWeek">
-                                    <option value="" disabled selected>Select a day</option>
+                                        <option value="" disabled selected>Select a day</option>
                                         <option value="2">Monday</option>
                                         <option value="3">Tuesday</option>
                                         <option value="4">Wednesday</option>
@@ -121,13 +121,13 @@ $conn = sqlsrv_connect($serverName, $connectionInfo);
 
 if (isset($_POST['submit'])) {
 
-    $start=str_replace("-",".",$_POST["date-start"]);
-    $end=str_replace("-",".",$_POST["date-end"]);
+    $start = str_replace("-", ".", $_POST["date-start"]);
+    $end = str_replace("-", ".", $_POST["date-end"]);
     echo $_POST["timeFrom"];
-    $from=$_POST["timeFrom"];
-    $to=$_POST["timeTo"];
-    $day=$_POST["DayOfWeek"];
-    $street=$_POST["Street"];
+    $from = $_POST["timeFrom"];
+    $to = $_POST["timeTo"];
+    $day = $_POST["DayOfWeek"];
+    $street = $_POST["Street"];
     /* //utca delete
     if (!empty($street) &&  empty($start) &&  empty($end) &&  empty($from) &&  empty($to) &&  empty($day)) {
         $tsql = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] WHERE Street='$street'";
@@ -268,47 +268,61 @@ if (isset($_POST['submit'])) {
         echo $start;
     } */
 
-    $starter = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] WHERE 1=1 ";
+    $starter = "SELECT X_cord,Y_cord,SubType FROM [dbo].[TrafficD] WHERE 1=1 ";
 
-    if(!empty($street)){
+    if (!empty($street)) {
         $streetQuerry = " AND Street='$street'";
     }
-    if(!empty($start)){
+    if (!empty($start)) {
         $startQuerry = " AND DataDate >= CONVERT(datetime,'$start')";
     }
-    if(!empty($end)){
+    if (!empty($end)) {
         $endQuerry = " AND DataDate < CONVERT(datetime,'$end')";
     }
-    if(!empty($from)){
+    if (!empty($from)) {
         $fromQuerry = " AND DATEPART(HOUR,CONVERT(DateTime,DataDate)) >= DATEPART(HOUR, '$from')";
     }
-    if(!empty($to)){
+    if (!empty($to)) {
         $toQuerry = " AND DATEPART(HOUR,CONVERT(DateTime,DataDate)) < DATEPART(HOUR, '$to')";
     }
-    if(!empty($day)){
+    if (!empty($day)) {
         $dayQuerry = " AND DATEPART(weekday ,DataDate) = $day";
     }
     echo "{$starter}{$streetQuerry}{$startQuerry}{$endQuerry}{$fromQuerry}{$toQuerry}{$dayQuerry}";
     $tsql = "{$starter}{$streetQuerry}{$startQuerry}{$endQuerry}{$fromQuerry}{$toQuerry}{$dayQuerry}";
-    $getResults = sqlsrv_query($conn, $tsql); 
+    $getResults = sqlsrv_query($conn, $tsql);
 
-    
-    
-
-
-    
-   
 
     while ($row = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_ASSOC)) {
         $resultY = $row['Y_cord']; //47
         $resultX = $row['X_cord']; //21
-
-        echo "<script type='text/JavaScript'>  
+        
+        if ($row['SubType'] == 	"Beállt a forgalom") {
+            echo "<script type='text/JavaScript'>  
             L.circle([$resultY, $resultX],10,{
             stroke: false,
-            color  : '#ff1234',
-            fillOpacity: 0.7,}).addTo(map);
+            color  : '#ff0000',
+            fillOpacity: 0.87,}).addTo(map);
             </script>";
+        }
+
+        if ($row['SubType'] == 	"Torlódás nagy forgalommal") {
+            echo "<script type='text/JavaScript'>  
+            L.circle([$resultY, $resultX],10,{
+            stroke: false,
+            color  : '#f7ff02',
+            fillOpacity: 0.87,}).addTo(map);
+            </script>";
+        }
+        
+        if ($row['SubType'] == 	"Torlódás mérsékelt forgalommal") {
+            echo "<script type='text/JavaScript'>  
+            L.circle([$resultY, $resultX],10,{
+            stroke: false,
+            color  : '#00ff00',
+            fillOpacity: 0.87,}).addTo(map);
+            </script>";
+        }
     }
 }
 
