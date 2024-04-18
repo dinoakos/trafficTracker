@@ -71,7 +71,7 @@
                     <hr style="width: 135%;">
 
                     <input type="checkbox" id="modeT" name="modeButton">
-                    <label for="modeButton"> I have a bike</label><br>
+                    <label for="modeButton"> Directional view</label><br>
 
                     <hr style="width: 135%;">
 
@@ -184,20 +184,19 @@ if (isset($_POST['submit'])) {
             color  : '#00ff00',
             fillOpacity: 1,}).addTo(map);
             </script>";
-        }
-    }
-    echo "<script type='text/JavaScript'>  
+
+            echo "<script type='text/JavaScript'>  
             var latlngs = [
-            [45.51, -122.68],
-            [37.77, -122.43],
-            [34.04, -118.2]
+            [$resultY-0.01, $resultX-0.01],
+            [$resultY, $resultX],
+            [$resultY-0.01, $resultX-0.01]
             ];
     
-            var polyline = L.polyline(latlngs, {color: 'red'}).addTo(map);
-    
-            // zoom the map to the polyline
-            map.fitBounds(polyline.getBounds());
+            var polyline = L.polyline(latlngs, {color: 'green'}).addTo(map);
             </script>";
+        }
+    }
+    
 }
 
 
