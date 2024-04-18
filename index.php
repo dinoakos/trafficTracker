@@ -186,10 +186,14 @@ if (isset($_POST['submit'])) {
             </script>";
             
             $yOne= $resultY-0.00007;
-            $yTwo= $resultY-0.00007;
-
             $xOne=$resultX+0.00010;
+
+            echo "$yOne $xOne";
+
+            $yTwo= $resultY-0.00007;
             $xTwo=$resultX-0.00010;
+
+            echo "$yTwo $xTwo";
             
             $tempXOne = $xOne * cos($row['Direction']) - $yOne * sin($row['Direction']);
             $tempYOne = $xOne * sin($row['Direction']) + $yOne * cos($row['Direction']);
@@ -197,7 +201,8 @@ if (isset($_POST['submit'])) {
             $tempXTwo = $xTwo * cos($row['Direction']) - $yTwo * sin($row['Direction']);
             $tempYTwo = $xTwo * sin($row['Direction']) + $yTwo * cos($row['Direction']);
 
-            
+            echo "$tempYOne $tempXOne";
+            echo "$tempYTwo $tempXTwo";
 
             
             
