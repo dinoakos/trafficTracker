@@ -135,6 +135,7 @@ if (isset($_POST['submit'])) {
     }
     //test Monday with street 
     if (!empty($street) &&  empty($start) &&  empty($end) &&  empty($from) &&  empty($to) &&  !empty($day)) {
+        echo $day;
         $tsql = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] WHERE DATEPART(weekday ,DataDate) = $day AND Street='$street'";
         $getResults = sqlsrv_query($conn, $tsql); 
     }
