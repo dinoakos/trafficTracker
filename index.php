@@ -271,22 +271,22 @@ if (isset($_POST['submit'])) {
     $starter = "SELECT X_cord,Y_cord FROM [dbo].[TrafficD] WHERE 1=1 ";
 
     if(!empty($street)){
-        $streetQuerry = "AND Street='$street'";
+        $streetQuerry = " AND Street='$street'";
     }
     if(!empty($start)){
-        $startQuerry = "AND DataDate >= CONVERT(datetime,'$start')";
+        $startQuerry = " AND DataDate >= CONVERT(datetime,'$start')";
     }
     if(!empty($end)){
-        $endQuerry = "AND DataDate < CONVERT(datetime,'$end')";
+        $endQuerry = " AND DataDate < CONVERT(datetime,'$end')";
     }
     if(!empty($from)){
-        $fromQuerry = "AND DATEPART(HOUR,CONVERT(DateTime,DataDate)) >= DATEPART(HOUR, '$from'))";
+        $fromQuerry = " AND DATEPART(HOUR,CONVERT(DateTime,DataDate)) >= DATEPART(HOUR, '$from')";
     }
     if(!empty($to)){
-        $toQuerry = "AND DATEPART(HOUR,CONVERT(DateTime,DataDate)) < DATEPART(HOUR, '$to'))";
+        $toQuerry = " AND DATEPART(HOUR,CONVERT(DateTime,DataDate)) < DATEPART(HOUR, '$to')";
     }
     if(!empty($day)){
-        $dayQuerry = "AND DATEPART(weekday ,DataDate) = $day)";
+        $dayQuerry = " AND DATEPART(weekday ,DataDate) = $day)";
     }
     echo "{$starter}{$streetQuerry}{$startQuerry}{$endQuerry}{$fromQuerry}{$toQuerry}{$dayQuerry}";
     $tsql = "{$starter}{$streetQuerry}{$startQuerry}{$endQuerry}{$fromQuerry}{$toQuerry}{$dayQuerry}";
