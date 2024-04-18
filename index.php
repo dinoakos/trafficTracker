@@ -159,8 +159,8 @@ if (isset($_POST['submit'])) {
         $resultX = $row['X_cord']; //21
         // Define the vertices of the triangle
         $triangle = array(
-            array($resultY, $resultX),  // Vertex A (top corner)
-            array($resultY-0.00007, $resultX-0.00010),  // Vertex B
+            array($resultY-0.00007, $resultX-0.00010),  // Vertex A
+            array($resultY, $resultX),  // Vertex B (top corner)
             array($resultY-0.00007, $resultX+0.00010)   // Vertex C
         );
 
