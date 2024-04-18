@@ -289,7 +289,7 @@ function rotatePoint($point, $center, $angle)
 // Function to rotate a triangle around its top corner (vertex b)
 function rotateTriangle($triangle, $angle)
 {
-    $topCorner = $triangle[1]; // Top corner (vertex b)
+    $topCorner = $triangle[1]; // Top corner (vertex B)
 
     $rotatedTriangle = array();
     foreach ($triangle as $vertex) {
