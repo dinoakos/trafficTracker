@@ -70,7 +70,8 @@
 
                     <hr style="width: 135%;">
 
-                    <Button style="width: 135%;" id="switch" onclick="viewTog();return false;">Switch to directional view</button>
+                    <input type="checkbox" id="modeT" name="modeButton">
+                    <label for="modeButton"> I have a bike</label><br>
 
                     <hr style="width: 135%;">
 
@@ -120,7 +121,7 @@ $serverName = "tcp:trafficdb.database.windows.net,1433";
 $conn = sqlsrv_connect($serverName, $connectionInfo);
 
 if (isset($_POST['submit'])) {
-
+    $mode = 
     $start = str_replace("-", ".", $_POST["date-start"]);
     $end = str_replace("-", ".", $_POST["date-end"]);
     echo $_POST["timeFrom"];
