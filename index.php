@@ -121,8 +121,7 @@ $serverName = "tcp:trafficdb.database.windows.net,1433";
 $conn = sqlsrv_connect($serverName, $connectionInfo);
 
 if (isset($_POST['submit'])) {
-    $mode =
-        $start = str_replace("-", ".", $_POST["date-start"]);
+    $start = str_replace("-", ".", $_POST["date-start"]);
     $end = str_replace("-", ".", $_POST["date-end"]);
     echo $_POST["timeFrom"];
     $from = $_POST["timeFrom"];
@@ -159,55 +158,75 @@ if (isset($_POST['submit'])) {
         $resultY = $row['Y_cord']; //47
         $resultX = $row['X_cord']; //21
 
-        if ($row['SubType'] == "Beállt a forgalom") {
-            echo "<script type='text/JavaScript'>  
+        if (!isset($_POST['modeButton'])) {
+
+            if ($row['SubType'] == "Beállt a forgalom") {
+                echo "<script type='text/JavaScript'>  
             L.circle([$resultY, $resultX],10,{
             stroke: false,
             color  : '#ff0000',
             fillOpacity: 1,}).addTo(map);
             </script>";
-        }
+            }
 
-        if ($row['SubType'] == "Torlódás nagy forgalommal") {
-            echo "<script type='text/JavaScript'>  
+            if ($row['SubType'] == "Torlódás nagy forgalommal") {
+                echo "<script type='text/JavaScript'>  
             L.circle([$resultY, $resultX],10,{
             stroke: false,
             color  : '#f7ff02',
             fillOpacity: 1,}).addTo(map);
             </script>";
-        }
+            }
 
-        if ($row['SubType'] == "Torlódás mérsékelt forgalommal") {
-            echo "<script type='text/JavaScript'>  
+            if ($row['SubType'] == "Torlódás mérsékelt forgalommal") {
+                echo "<script type='text/JavaScript'>  
             L.circle([$resultY, $resultX],10,{
             stroke: false,
             color  : '#00ff00',
             fillOpacity: 1,}).addTo(map);
             </script>";
-            
-            $yOne= $resultY-0.00007;
-            $xOne=$resultX+0.00010;
 
-            echo "yone xone $yOne $xOne ";
+            }
+        } else {
+            if ($row['SubType'] == "Beállt a forgalom") {
+                echo "<script type='text/JavaScript'>  
+                var latlngs = [
+                [$tempYOne, $tempXOne],
+                [$resultY, $resultX],
+                [$tempYTwo, $tempXTwo]
+                ];
+                var polyline = L.polyline(latlngs, {color: 'red'}).addTo(map);
+                </script>";
+            }
 
-            $yTwo= $resultY-0.00007;
-            $xTwo=$resultX-0.00010;
+            if ($row['SubType'] == "Torlódás nagy forgalommal") {
+                echo "<script type='text/JavaScript'>  
+                var latlngs = [
+                [$tempYOne, $tempXOne],
+                [$resultY, $resultX],
+                [$tempYTwo, $tempXTwo]
+                ];
+                var polyline = L.polyline(latlngs, {color: 'yellow'}).addTo(map);
+                </script>";
+            }
 
-            echo "ytwo xtwo $yTwo $xTwo ";
-            
-            $tempXOne = $xOne * cos($row['Direction']) - $yOne * sin($row['Direction']);
-            $tempYOne = $xOne * sin($row['Direction']) + $yOne * cos($row['Direction']);
+            if ($row['SubType'] == "Torlódás mérsékelt forgalommal") {
+                echo "<script type='text/JavaScript'>  
+                var latlngs = [
+                [$tempYOne, $tempXOne],
+                [$resultY, $resultX],
+                [$tempYTwo, $tempXTwo]
+                ];
+                var polyline = L.polyline(latlngs, {color: 'green'}).addTo(map);
+                </script>";
 
-            $tempXTwo = $xTwo * cos($row['Direction']) - $yTwo * sin($row['Direction']);
-            $tempYTwo = $xTwo * sin($row['Direction']) + $yTwo * cos($row['Direction']);
+            }
+        }
+    }
 
-            echo "tempyone tempxone $tempYOne $tempXOne ";
-            echo "tempYTwo tempXTwo $tempYTwo $tempXTwo ";
+}
 
-            
-            
-
-            echo "<script type='text/JavaScript'>  
+/* echo "<script type='text/JavaScript'>  
             var latlngs = [
             [$tempYOne, $tempXOne],
             [$resultY, $resultX],
@@ -215,11 +234,7 @@ if (isset($_POST['submit'])) {
             ];
     
             var polyline = L.polyline(latlngs, {color: 'green'}).addTo(map);
-            </script>";
-        }
-    }
-    
-}
+            </script>"; */
 
 
 sqlsrv_free_stmt($getResults);
