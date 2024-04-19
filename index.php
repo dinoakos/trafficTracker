@@ -159,9 +159,9 @@ if (isset($_POST['submit'])) {
         $resultX = $row['X_cord']; //21
         // Define the vertices of the triangle
         $triangle = array(
-            array($resultY-0.00007, $resultX-0.00010),  // Vertex A
+            array($resultY - 0.00007, $resultX - 0.00010),  // Vertex A
             array($resultY, $resultX),  // Vertex B (top corner)
-            array($resultY-0.00007, $resultX+0.00010)   // Vertex C
+            array($resultY - 0.00007, $resultX + 0.00010)   // Vertex C
         );
 
         if (!isset($_POST['modeButton'])) {
@@ -195,14 +195,14 @@ if (isset($_POST['submit'])) {
             }
         } else {
             if ($row['SubType'] == "Beállt a forgalom") {
-                
+
                 $rotatedTriangle = rotateTriangle($triangle, $row['Direction']);
                 echo "<script type='text/JavaScript'>  
                 var latlngs = [";
                 foreach ($rotatedTriangle as $vertex) {
                     echo "[$vertex[0] , $vertex[1] ],";
                 }
-                echo"];
+                echo "];
                 var polyline = L.polyline(latlngs, {color: 'red'}).addTo(map);
                 </script>";
             }
@@ -214,7 +214,7 @@ if (isset($_POST['submit'])) {
                 foreach ($rotatedTriangle as $vertex) {
                     echo "[$vertex[0] , $vertex[1] ],";
                 }
-                echo"];
+                echo "];
                 var polyline = L.polyline(latlngs, {color: 'yellow'}).addTo(map);
                 </script>";
             }
@@ -226,37 +226,16 @@ if (isset($_POST['submit'])) {
                 foreach ($rotatedTriangle as $vertex) {
                     echo "[$vertex[0] , $vertex[1] ],";
                 }
-                echo"];
+                echo "];
                 var polyline = L.polyline(latlngs, {color: 'green'}).addTo(map);
                 </script>";
 
             }
         }
-        /* [$resultY-0.00007, $resultX-0.00010],
-                [$resultY, $resultX],
-                [$resultY-0.00007, $resultX+0.00010] */
-        
-        
-
-        
-
-        // Output the rotated triangle
-        /* foreach ($rotatedTriangle as $vertex) {
-            echo "($vertex[0], $vertex[1])\n";
-        } */
     }
-
 }
 
-/* echo "<script type='text/JavaScript'>  
-            var latlngs = [
-            [$tempYOne, $tempXOne],
-            [$resultY, $resultX],
-            [$tempYTwo, $tempXTwo]
-            ];
-    
-            var polyline = L.polyline(latlngs, {color: 'green'}).addTo(map);
-            </script>"; */
+
 
 
 sqlsrv_free_stmt($getResults);
