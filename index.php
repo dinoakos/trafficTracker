@@ -71,7 +71,7 @@
                     <hr style="width: 135%;">
 
                     <input type="checkbox" id="modeT" name="modeButton">
-                    <label for="modeButton"> Directional view</label><br>
+                    <label for="modeButton" id="direct"> Directional view</label><br>
 
                     <hr style="width: 135%;">
 

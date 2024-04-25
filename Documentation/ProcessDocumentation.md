@@ -21,6 +21,7 @@ The site will include a street search function as well which will allow the user
 As OpenStreetMap data falls under “Open Data Commons Open Database License”.
  “OpenStreetMap® is open data, licensed under the Open Data Commons Open Database License (ODbL) by the OpenStreetMap Foundation (OSMF).
 You are free to copy, distribute, transmit and adapt our data, as long as you credit OpenStreetMap and its contributors. If you alter or build upon our data, you may distribute the result only under the same licence. The full legal code explains your rights and responsibilities.” 
+Leaflet falls under the 2-clause BSD License. Meaning with attribution and including the license it is free to use for any purpose.
 - https://www.openstreetmap.org/copyright
 ## Model of the desired product
 The goal of the project is to create a site that makes it easy for everyday people to plan their routines more efficiently, using python to approximate the given dataset and pair it to the OpenStreetMap road data. Which will then be visualized based on the needs of the user. For this the following steps must be taken:
