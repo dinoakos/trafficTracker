@@ -157,11 +157,13 @@ if (isset($_POST['submit'])) {
     while ($row = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_ASSOC)) {
         $resultY = $row['Y_cord']; //47
         $resultX = $row['X_cord']; //21
-        // Define the vertices of the triangle
+
+        // Háromszög definiálása
+
         $triangle = array(
-            array($resultY - 0.00007, $resultX - 0.00010),  // Vertex A
-            array($resultY, $resultX),  // Vertex B (top corner)
-            array($resultY - 0.00007, $resultX + 0.00010)   // Vertex C
+            array($resultY - 0.00007, $resultX - 0.00010),  // A
+            array($resultY, $resultX),  // B (top corner)
+            array($resultY - 0.00007, $resultX + 0.00010)   //C
         );
 
         if (!isset($_POST['modeButton'])) {
@@ -240,31 +242,31 @@ if (isset($_POST['submit'])) {
 
 sqlsrv_free_stmt($getResults);
 
-// Function to rotate a point around another point by a certain angle
+
 function rotatePoint($point, $center, $angle)
 {
     $s = sin(deg2rad($angle));
     $c = cos(deg2rad($angle));
 
-    // Translate point back to origin
+    // 0-ba állítás
     $point[0] -= $center[0];
     $point[1] -= $center[1];
 
-    // Rotate point
+    // forgatás
     $xnew = $point[0] * $c - $point[1] * $s;
     $ynew = $point[0] * $s + $point[1] * $c;
 
-    // Translate point back
+    // 0-ból vissza állítás
     $point[0] = $xnew + $center[0];
     $point[1] = $ynew + $center[1];
 
     return $point;
 }
 
-// Function to rotate a triangle around its top corner (vertex b)
+// forgatás b pont körül
 function rotateTriangle($triangle, $angle)
 {
-    $topCorner = $triangle[1]; // Top corner (vertex B)
+    $topCorner = $triangle[1]; //  B
 
     $rotatedTriangle = array();
     foreach ($triangle as $vertex) {
